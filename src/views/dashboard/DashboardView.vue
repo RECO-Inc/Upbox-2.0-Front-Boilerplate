@@ -26,7 +26,8 @@ import {Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, Dra
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog'
 import EnhancedInput from '@/components/ui/input/EnhancedInput.vue'
 import EnhancedTextarea from '@/components/ui/input/EnhancedTextarea.vue'
-import {Bold, Calendar as CalendarIcon, Italic, Underline, Mail, User, Search, DollarSign} from 'lucide-vue-next'
+import EnhancedButton from '@/components/ui/button/EnhancedButton.vue'
+import {Bold, Calendar as CalendarIcon, Italic, Underline, Mail, User, Search, DollarSign, Heart, Download, ChevronRight} from 'lucide-vue-next'
 import {useDate} from '@/composables/useDate'
 
 const {t, locale} = useI18n()
@@ -69,6 +70,15 @@ const enhancedFilledTextarea = ref('')
 const enhancedBottomlineTextarea = ref('')
 const enhancedErrorTextarea = ref('')
 const enhancedDisabledTextarea = ref('Disabled textarea')
+
+// Enhanced Button states
+const isButtonLoading = ref(false)
+const handleLoadingClick = () => {
+  isButtonLoading.value = true
+  setTimeout(() => {
+    isButtonLoading.value = false
+  }, 2000)
+}
 
 // Date utilities
 const dateUtil = useDate()
@@ -491,6 +501,83 @@ const displayDate = computed(() => {
                   <Button size="sm">{{ t('playground.button.small') }}</Button>
                   <Button size="default">{{ t('playground.button.default') }}</Button>
                   <Button size="lg">{{ t('playground.button.large') }}</Button>
+                </CardContent>
+              </Card>
+
+              <!-- Enhanced Button Showcase -->
+              <Card>
+                <CardHeader>
+                  <CardTitle>{{ t('playground.enhancedButton.title') }}</CardTitle>
+                  <CardDescription>{{ t('playground.enhancedButton.description') }}</CardDescription>
+                </CardHeader>
+                <CardContent class="space-y-8">
+                  <!-- Size Variants -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.sizesTitle') }}</h3>
+                    <div class="flex flex-wrap items-center gap-4">
+                      <EnhancedButton size="xsmall">{{ t('playground.enhancedButton.xsmallButton') }}</EnhancedButton>
+                      <EnhancedButton size="small">{{ t('playground.enhancedButton.smallButton') }}</EnhancedButton>
+                      <EnhancedButton size="regular">{{ t('playground.enhancedButton.regularButton') }}</EnhancedButton>
+                      <EnhancedButton size="medium">{{ t('playground.enhancedButton.mediumButton') }}</EnhancedButton>
+                      <EnhancedButton size="large">{{ t('playground.enhancedButton.largeButton') }}</EnhancedButton>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  <!-- Color Variants -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.variantsTitle') }}</h3>
+                    <div class="flex flex-wrap gap-4">
+                      <EnhancedButton variant="primary">{{ t('playground.enhancedButton.defaultButton') }}</EnhancedButton>
+                      <EnhancedButton variant="error">{{ t('playground.enhancedButton.errorButton') }}</EnhancedButton>
+                      <EnhancedButton variant="positive">{{ t('playground.enhancedButton.positiveButton') }}</EnhancedButton>
+                      <EnhancedButton variant="usually">{{ t('playground.enhancedButton.usuallyButton') }}</EnhancedButton>
+                      <EnhancedButton variant="assistant">{{ t('playground.enhancedButton.assistantButton') }}</EnhancedButton>
+                      <EnhancedButton variant="info">{{ t('playground.enhancedButton.infoButton') }}</EnhancedButton>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  <!-- Style Variants -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.stylesTitle') }}</h3>
+                    <div class="flex flex-wrap gap-4">
+                      <EnhancedButton style="filled">{{ t('playground.enhancedButton.filledButton') }}</EnhancedButton>
+                      <EnhancedButton style="outlined">{{ t('playground.enhancedButton.outlinedButton') }}</EnhancedButton>
+                      <EnhancedButton style="text">{{ t('playground.enhancedButton.textButton') }}</EnhancedButton>
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  <!-- Features -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.featuresTitle') }}</h3>
+                    <div class="flex flex-wrap gap-4">
+                      <EnhancedButton block>{{ t('playground.enhancedButton.blockButton') }}</EnhancedButton>
+                      <EnhancedButton round>{{ t('playground.enhancedButton.roundButton') }}</EnhancedButton>
+                      <EnhancedButton :loading="isButtonLoading" @click="handleLoadingClick">
+                        {{ t('playground.enhancedButton.loadingButton') }}
+                      </EnhancedButton>
+                      <EnhancedButton :icon-left="Heart">{{ t('playground.enhancedButton.withIconLeft') }}</EnhancedButton>
+                      <EnhancedButton :icon-right="ChevronRight">{{ t('playground.enhancedButton.withIconRight') }}</EnhancedButton>
+                      <EnhancedButton :icon-only="Download" />
+                    </div>
+                  </div>
+
+                  <Separator />
+
+                  <!-- States -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.statesTitle') }}</h3>
+                    <div class="flex flex-wrap gap-4">
+                      <EnhancedButton disabled>{{ t('playground.enhancedButton.disabledButton') }}</EnhancedButton>
+                      <EnhancedButton variant="error" disabled>{{ t('playground.enhancedButton.disabledButton') }}</EnhancedButton>
+                      <EnhancedButton style="outlined" disabled>{{ t('playground.enhancedButton.disabledButton') }}</EnhancedButton>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
 
