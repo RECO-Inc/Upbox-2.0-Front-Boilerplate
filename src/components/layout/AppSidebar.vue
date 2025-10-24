@@ -57,7 +57,7 @@ const isCurrentRoute = (path: string) => {
     </header>
 
     <!-- Sidebar -->
-    <Sidebar collapsible="icon">
+    <Sidebar side="right" collapsible="icon">
       <SidebarContent>
         <!-- User Info Group -->
         <SidebarGroup>

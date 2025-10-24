@@ -24,7 +24,11 @@ import {Calendar} from '@/components/ui/calendar'
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger} from '@/components/ui/drawer'
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog'
-import {Bold, Calendar as CalendarIcon, Italic, Underline, Mail, User, Search, DollarSign, Heart, Download, ChevronRight} from 'lucide-vue-next'
+import {NumberField, NumberFieldContent, NumberFieldDecrement, NumberFieldIncrement, NumberFieldInput} from '@/components/ui/number-field'
+import {Skeleton} from '@/components/ui/skeleton'
+import {Accordion, AccordionContent, AccordionItem, AccordionTrigger} from '@/components/ui/accordion'
+import {Pagination, PaginationContent, PaginationEllipsis, PaginationFirst, PaginationLast, PaginationItem, PaginationNext, PaginationPrevious} from '@/components/ui/pagination'
+import {Bold, Calendar as CalendarIcon, Italic, Underline, Heart, Download, ChevronRight, Minus, Plus} from 'lucide-vue-next'
 import {useDate} from '@/composables/useDate'
 
 const {t, locale} = useI18n()
@@ -39,6 +43,8 @@ const toggleValue = ref(false)
 const toggleGroupValue = ref('center')
 const calendarDate = ref<DateValue>()
 const isCalendarOpen = ref(false)
+const numberValue = ref(5)
+const currentPage = ref(1)
 
 // Enhanced Input states
 const enhancedBasicInput = ref('')
@@ -48,7 +54,6 @@ const enhancedLargeInput = ref('')
 const enhancedDefaultInput = ref('')
 const enhancedFilledInput = ref('')
 const enhancedBottomlineInput = ref('')
-const enhancedIconInput = ref('')
 const enhancedClearableInput = ref('')
 const enhancedPasswordInput = ref('')
 const enhancedSubfixInput = ref('25')
@@ -140,17 +145,18 @@ const displayDate = computed(() => {
 
           <!-- Tabs for organized sections -->
           <Tabs default-value="inputs" class="w-full">
-            <TabsList class="grid w-full grid-cols-5">
+            <TabsList class="grid w-full grid-cols-6">
               <TabsTrigger value="inputs">{{ t('playground.tabs.inputs') }}</TabsTrigger>
               <TabsTrigger value="buttons">{{ t('playground.tabs.buttons') }}</TabsTrigger>
               <TabsTrigger value="data">{{ t('playground.tabs.data') }}</TabsTrigger>
               <TabsTrigger value="feedback">{{ t('playground.tabs.feedback') }}</TabsTrigger>
               <TabsTrigger value="overlays">{{ t('playground.tabs.overlays') }}</TabsTrigger>
+              <TabsTrigger value="navigation">{{ t('playground.tabs.navigation') }}</TabsTrigger>
             </TabsList>
 
             <!-- Inputs Tab -->
             <TabsContent value="inputs" class="space-y-6">
-              <!-- Input Showcase (LinkFrontApp Style) -->
+              <!-- Input Showcase -->
               <Card>
                 <CardHeader>
                   <CardTitle>{{ t('playground.enhancedInput.title') }}</CardTitle>
@@ -177,19 +183,19 @@ const displayDate = computed(() => {
                       v-model="enhancedSmallInput"
                       :label="t('playground.enhancedInput.smallLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
-                      size="small"
+                      size="sm"
                     />
                     <Input
                       v-model="enhancedRegularInput"
                       :label="t('playground.enhancedInput.regularLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
-                      size="regular"
+                      size="md"
                     />
                     <Input
                       v-model="enhancedLargeInput"
                       :label="t('playground.enhancedInput.largeLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
-                      size="large"
+                      size="lg"
                     />
                   </div>
 
@@ -223,13 +229,6 @@ const displayDate = computed(() => {
                   <!-- Features -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.featuresTitle') }}</h3>
-                    <Input
-                      v-model="enhancedIconInput"
-                      :label="t('playground.enhancedInput.withIconsLabel')"
-                      :placeholder="t('playground.enhancedInput.placeholder')"
-                      :icon-left="Mail"
-                      :icon-right="Search"
-                    />
                     <Input
                       v-model="enhancedClearableInput"
                       :label="t('playground.enhancedInput.clearableLabel')"
@@ -445,6 +444,32 @@ const displayDate = computed(() => {
                   <p class="mt-4 text-size-14 text-base-60">{{ t('playground.select.selected') }}: {{ selectValue }}</p>
                 </CardContent>
               </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>{{ t('playground.numberField.title') }}</CardTitle>
+                  <CardDescription>{{ t('playground.numberField.description') }}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <NumberField
+                    v-model="numberValue"
+                    :min="0"
+                    :max="10"
+                  >
+                    <label class="text-size-14 font-medium mb-2 block">{{ t('playground.numberField.label') }}</label>
+                    <NumberFieldContent>
+                      <NumberFieldDecrement>
+                        <Minus class="h-4 w-4" />
+                      </NumberFieldDecrement>
+                      <NumberFieldInput />
+                      <NumberFieldIncrement>
+                        <Plus class="h-4 w-4" />
+                      </NumberFieldIncrement>
+                    </NumberFieldContent>
+                  </NumberField>
+                  <p class="mt-4 text-size-14 text-base-60">{{ t('playground.input.value') }}: {{ numberValue }}</p>
+                </CardContent>
+              </Card>
             </TabsContent>
 
             <!-- Buttons Tab -->
@@ -460,11 +485,11 @@ const displayDate = computed(() => {
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.sizesTitle') }}</h3>
                     <div class="flex flex-wrap items-center gap-4">
-                      <Button size="xsmall">{{ t('playground.enhancedButton.xsmallButton') }}</Button>
-                      <Button size="small">{{ t('playground.enhancedButton.smallButton') }}</Button>
-                      <Button size="regular">{{ t('playground.enhancedButton.regularButton') }}</Button>
-                      <Button size="medium">{{ t('playground.enhancedButton.mediumButton') }}</Button>
-                      <Button size="large">{{ t('playground.enhancedButton.largeButton') }}</Button>
+                      <Button size="xs">{{ t('playground.enhancedButton.xsButton') }}</Button>
+                      <Button size="sm">{{ t('playground.enhancedButton.smButton') }}</Button>
+                      <Button size="md">{{ t('playground.enhancedButton.mdButton') }}</Button>
+                      <Button size="lg">{{ t('playground.enhancedButton.lgButton') }}</Button>
+                      <Button size="xl">{{ t('playground.enhancedButton.xlButton') }}</Button>
                     </div>
                   </div>
 
@@ -489,9 +514,9 @@ const displayDate = computed(() => {
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.stylesTitle') }}</h3>
                     <div class="flex flex-wrap gap-4">
-                      <Button style="filled">{{ t('playground.enhancedButton.filledButton') }}</Button>
-                      <Button style="outlined">{{ t('playground.enhancedButton.outlinedButton') }}</Button>
-                      <Button style="text">{{ t('playground.enhancedButton.textButton') }}</Button>
+                      <Button button-style="filled">{{ t('playground.enhancedButton.filledButton') }}</Button>
+                      <Button button-style="outlined">{{ t('playground.enhancedButton.outlinedButton') }}</Button>
+                      <Button button-style="text">{{ t('playground.enhancedButton.textButton') }}</Button>
                     </div>
                   </div>
 
@@ -506,9 +531,17 @@ const displayDate = computed(() => {
                       <Button :loading="isButtonLoading" @click="handleLoadingClick">
                         {{ t('playground.enhancedButton.loadingButton') }}
                       </Button>
-                      <Button :icon-left="Heart">{{ t('playground.enhancedButton.withIconLeft') }}</Button>
-                      <Button :icon-right="ChevronRight">{{ t('playground.enhancedButton.withIconRight') }}</Button>
-                      <Button :icon-only="Download" />
+                      <Button>
+                        <Heart class="mr-2 h-4 w-4" />
+                        {{ t('playground.enhancedButton.withIconLeft') }}
+                      </Button>
+                      <Button>
+                        {{ t('playground.enhancedButton.withIconRight') }}
+                        <ChevronRight class="ml-2 h-4 w-4" />
+                      </Button>
+                      <Button>
+                        <Download class="h-4 w-4" />
+                      </Button>
                     </div>
                   </div>
 
@@ -520,7 +553,7 @@ const displayDate = computed(() => {
                     <div class="flex flex-wrap gap-4">
                       <Button disabled>{{ t('playground.enhancedButton.disabledButton') }}</Button>
                       <Button variant="error" disabled>{{ t('playground.enhancedButton.disabledButton') }}</Button>
-                      <Button style="outlined" disabled>{{ t('playground.enhancedButton.disabledButton') }}</Button>
+                      <Button button-style="outlined" disabled>{{ t('playground.enhancedButton.disabledButton') }}</Button>
                     </div>
                   </div>
                 </CardContent>
@@ -651,6 +684,27 @@ const displayDate = computed(() => {
                   <Spinner class="h-12 w-12" />
                 </CardContent>
               </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>{{ t('playground.skeleton.title') }}</CardTitle>
+                  <CardDescription>{{ t('playground.skeleton.description') }}</CardDescription>
+                </CardHeader>
+                <CardContent class="space-y-4">
+                  <div class="space-y-2">
+                    <Skeleton class="h-4 w-full" />
+                    <Skeleton class="h-4 w-4/5" />
+                    <Skeleton class="h-4 w-3/5" />
+                  </div>
+                  <div class="flex items-center space-x-4">
+                    <Skeleton class="h-12 w-12 rounded-full" />
+                    <div class="space-y-2 flex-1">
+                      <Skeleton class="h-4 w-full" />
+                      <Skeleton class="h-4 w-2/3" />
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
             </TabsContent>
 
             <!-- Overlays Tab -->
@@ -663,7 +717,7 @@ const displayDate = computed(() => {
                 <CardContent>
                   <Popover>
                     <PopoverTrigger as-child>
-                      <Button variant="outline">
+                      <Button button-style="outlined">
                         {{ t('playground.popover.openButton') }}
                       </Button>
                     </PopoverTrigger>
@@ -687,7 +741,7 @@ const displayDate = computed(() => {
                 <CardContent class="space-y-4">
                   <Popover v-model:open="isCalendarOpen">
                     <PopoverTrigger as-child>
-                      <Button variant="outline" class="w-full justify-start">
+                      <Button button-style="outlined" class="w-full justify-start">
                         <CalendarIcon class="mr-2 h-4 w-4" />
                         {{ displayDate }}
                       </Button>
@@ -725,7 +779,7 @@ const displayDate = computed(() => {
                 <CardContent>
                   <Drawer>
                     <DrawerTrigger as-child>
-                      <Button variant="outline" class="w-full">
+                      <Button button-style="outlined" class="w-full">
                         {{ t('playground.drawer.openButton') }}
                       </Button>
                     </DrawerTrigger>
@@ -736,14 +790,14 @@ const displayDate = computed(() => {
                       </DrawerHeader>
                       <div class="p-4">
                         <div class="space-y-4">
-                          <Input :placeholder="t('playground.input.placeholder')" />
-                          <Textarea :placeholder="t('playground.textarea.placeholder')" />
+                          <Input :placeholder="t('playground.input.placeholder')" variant="filled" />
+                          <Textarea :placeholder="t('playground.textarea.placeholder')" variant="filled" />
                         </div>
                       </div>
                       <DrawerFooter>
                         <Button>{{ t('playground.drawer.submit') }}</Button>
                         <DrawerClose as-child>
-                          <Button variant="outline">{{ t('playground.drawer.cancel') }}</Button>
+                          <Button button-style="outlined">{{ t('playground.drawer.cancel') }}</Button>
                         </DrawerClose>
                       </DrawerFooter>
                     </DrawerContent>
@@ -759,7 +813,7 @@ const displayDate = computed(() => {
                 <CardContent>
                   <Dialog>
                     <DialogTrigger as-child>
-                      <Button variant="outline" class="w-full">
+                      <Button button-style="outlined" class="w-full">
                         {{ t('playground.dialog.openButton') }}
                       </Button>
                     </DialogTrigger>
@@ -769,17 +823,88 @@ const displayDate = computed(() => {
                         <DialogDescription>{{ t('playground.dialog.dialogDescription') }}</DialogDescription>
                       </DialogHeader>
                       <div class="space-y-4 py-4">
-                        <Input :placeholder="t('playground.input.placeholder')" />
-                        <Textarea :placeholder="t('playground.textarea.placeholder')" />
+                        <Input :placeholder="t('playground.input.placeholder')" variant="filled" />
+                        <Textarea :placeholder="t('playground.textarea.placeholder')" variant="filled" />
                       </div>
                       <DialogFooter>
                         <DialogClose as-child>
-                          <Button variant="outline">{{ t('playground.dialog.close') }}</Button>
+                          <Button button-style="outlined">{{ t('playground.dialog.close') }}</Button>
                         </DialogClose>
                         <Button>{{ t('playground.dialog.confirm') }}</Button>
                       </DialogFooter>
                     </DialogContent>
                   </Dialog>
+                </CardContent>
+              </Card>
+            </TabsContent>
+
+            <!-- Navigation Tab -->
+            <TabsContent value="navigation" class="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>{{ t('playground.accordion.title') }}</CardTitle>
+                  <CardDescription>{{ t('playground.accordion.description') }}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Accordion type="single" collapsible class="w-full">
+                    <AccordionItem value="item-1">
+                      <AccordionTrigger>{{ t('playground.accordion.item1Title') }}</AccordionTrigger>
+                      <AccordionContent>
+                        {{ t('playground.accordion.item1Content') }}
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-2">
+                      <AccordionTrigger>{{ t('playground.accordion.item2Title') }}</AccordionTrigger>
+                      <AccordionContent>
+                        {{ t('playground.accordion.item2Content') }}
+                      </AccordionContent>
+                    </AccordionItem>
+                    <AccordionItem value="item-3">
+                      <AccordionTrigger>{{ t('playground.accordion.item3Title') }}</AccordionTrigger>
+                      <AccordionContent>
+                        {{ t('playground.accordion.item3Content') }}
+                      </AccordionContent>
+                    </AccordionItem>
+                  </Accordion>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>{{ t('playground.pagination.title') }}</CardTitle>
+                  <CardDescription>{{ t('playground.pagination.description') }}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Pagination
+                    v-slot="{ page }"
+                    :total="100"
+                    :items-per-page="10"
+                    :sibling-count="1"
+                    show-edges
+                    :default-page="1"
+                  >
+                    <PaginationContent v-slot="{ items }" class="flex items-center gap-1">
+                      <PaginationFirst />
+                      <PaginationPrevious />
+
+                      <template v-for="(item, index) in items">
+                        <PaginationItem v-if="item.type === 'page'" :key="index" :value="item.value" as-child>
+                          <Button
+                            :button-style="item.value === page ? 'filled' : 'outlined'"
+                            size="sm"
+                            :variant="item.value === page ? 'primary' : 'assistant'"
+                            :class="item.value !== page ? '!text-base-80' : ''"
+                          >
+                            {{ item.value }}
+                          </Button>
+                        </PaginationItem>
+                        <PaginationEllipsis v-else :key="item.type" :index="index" />
+                      </template>
+
+                      <PaginationNext />
+                      <PaginationLast />
+                    </PaginationContent>
+                  </Pagination>
                 </CardContent>
               </Card>
             </TabsContent>

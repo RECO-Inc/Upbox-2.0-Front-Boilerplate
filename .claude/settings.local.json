@@ -7,7 +7,8 @@
       "WebSearch",
       "Bash(printf:*)",
       "Read(//Users/parkjh/Documents/dev/Upbox-2.0-Front-Boilerplate/LinkFrontApp/src/**)",
-      "Bash(cat:*)"
+      "Bash(cat:*)",
+      "mcp__ide__getDiagnostics"
     ],
     "deny": [],
     "ask": []

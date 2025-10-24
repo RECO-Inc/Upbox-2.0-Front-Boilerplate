@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 # symbolic link
-LinkFrontApp
+LinkFrontApp/

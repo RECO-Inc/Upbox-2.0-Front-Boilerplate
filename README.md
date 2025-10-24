@@ -14,8 +14,11 @@ JWT 인증, 다국어 지원, 모던 UI 컴포넌트를 갖춘 프로덕션 레�
 ### UI 및 스타일링
 - 🎭 **Tailwind CSS v3** - 유틸리티 우선 CSS 프레임워크
 - 🧩 **shadcn-vue** - Radix Vue 기반의 고품질 접근성 컴포넌트
-- 🌈 **CSS Variables** - 동적 테마 지원 (라이트/다크 모드 준비)
+- 🎨 **커스텀 디자인 시스템** - 프로젝트 전용 Button, Input, Textarea 컴포넌트
+- 🌈 **CSS Variables** - 동적 테마 지원 (라이트/다크 모드 지원)
+- 🎯 **Sidebar 네비게이션** - 반응형 사이드바 레이아웃
 - 📱 **반응형 디자인** - 모바일 우선 접근 방식
+- 🎪 **Component Playground** - 모든 UI 컴포넌트 데모 페이지
 
 ### 인증 및 보안
 - 🔐 **JWT 인증** - Access & Refresh 토큰 관리
@@ -38,7 +41,8 @@ JWT 인증, 다국어 지원, 모던 UI 컴포넌트를 갖춘 프로덕션 레�
 
 ### 개발자 경험
 - 📦 **pnpm** - 빠르고 디스크 공간 효율적인 패키지 매니저
-- 🎨 **컴포넌트 라이브러리** - 사전 제작된 UI 컴포넌트 (Button, Input, Toast, Loading)
+- 🎨 **컴포넌트 라이브러리** - 커스텀 디자인 시스템 + shadcn-vue 컴포넌트
+- 📅 **Day.js** - 경량 날짜 처리 라이브러리
 - 🎯 **경로 별칭** - `@/` 접두사로 깔끔한 import
 - 🔥 **Hot Module Replacement** - 개발 중 빠른 새로고침
 - 📝 **타입 안전성** - 전체 TypeScript 커버리지
@@ -46,13 +50,24 @@ JWT 인증, 다국어 지원, 모던 UI 컴포넌트를 갖춘 프로덕션 레�
 ## 프로젝트 구조
 
 ```
-LinkBoilerplate/
+Upbox-2.0-Front-Boilerplate/
 ├── src/
 │   ├── api/                    # API 서비스 및 요청 핸들러
 │   │   ├── auth.service.ts    # 인증 엔드포인트
 │   │   └── request.ts         # Axios 설정 및 인터셉터
 │   ├── components/            # 재사용 가능한 컴포넌트
-│   │   ├── ui/               # UI 컴포넌트 (Button, Input)
+│   │   ├── ui/               # UI 컴포넌트 라이브러리
+│   │   │   ├── button/      # Button (커스텀 + Simple)
+│   │   │   ├── input/       # Input (커스텀 + Simple)
+│   │   │   ├── textarea/    # Textarea (커스텀 + Simple)
+│   │   │   ├── sidebar/     # Sidebar 네비게이션
+│   │   │   ├── calendar/    # Calendar (shadcn-vue)
+│   │   │   ├── pagination/  # Pagination (shadcn-vue)
+│   │   │   ├── dialog/      # Dialog (shadcn-vue)
+│   │   │   ├── drawer/      # Drawer (shadcn-vue)
+│   │   │   ├── toast/       # Toast (shadcn-vue)
+│   │   │   ├── card/        # Card (shadcn-vue)
+│   │   │   └── ...          # 기타 shadcn-vue 컴포넌트
 │   │   ├── Toast.vue         # 알림 컴포넌트
 │   │   └── Loading.vue       # 전역 로딩 인디케이터
 │   ├── locales/              # i18n 번역
@@ -77,8 +92,9 @@ LinkBoilerplate/
 │   │   └── utils.ts         # shadcn-vue 유틸리티
 │   ├── App.vue              # 루트 컴포넌트
 │   ├── main.ts              # 애플리케이션 진입점
-│   └── style.css            # shadcn-vue 변수가 있는 전역 스타일
+│   └── style.css            # 전역 스타일 및 CSS 변수
 ├── .env.example             # 환경 변수 템플릿
+├── components.json          # shadcn-vue 설정
 ├── package.json             # 의존성 및 스크립트
 ├── tsconfig.json            # TypeScript 설정
 ├── tailwind.config.js       # Tailwind CSS 설정
@@ -221,9 +237,28 @@ saveLocale('en')
 
 `src/locales/[lang]/index.ts`에 새 번역 추가
 
-### shadcn-vue 컴포넌트 추가
+### UI 컴포넌트 시스템
 
-이 보일러플레이트는 shadcn-vue가 사전 구성되어 있습니다. 새 컴포넌트 추가:
+이 보일러플레이트는 두 가지 컴포넌트 시스템을 제공합니다:
+
+#### 1. 커스텀 디자인 시스템
+프로젝트 전용 커스텀 디자인 컴포넌트:
+- **Button** (`/src/components/ui/button/Button.vue`)
+  - 6가지 variant: primary, error, positive, usually, assistant, info
+  - 3가지 style: filled, outlined, text
+  - 5가지 size: xs, sm, md, lg, xl
+- **Input** (`/src/components/ui/input/Input.vue`)
+  - 3가지 variant: default, filled, bottomline
+  - clearable, password, counter 기능
+- **Textarea** (`/src/components/ui/textarea/Textarea.vue`)
+  - 자동 크기 조절, counter 기능
+
+#### 2. shadcn-vue 컴포넌트
+Radix Vue 기반의 접근성 컴포넌트 (Simple 버전 포함):
+- **이미 설치된 컴포넌트**: Sidebar, Calendar, Pagination, Dialog, Drawer, Toast, Card, Tabs, Separator, Badge, Avatar, Table, Accordion, Popover, Skeleton, Number Field, Spinner 등
+- **Simple 버전**: Button, Input, Textarea는 shadcn-vue 원본 버전도 함께 제공 (`SimpleButton.vue`, `SimpleInput.vue`, `SimpleTextarea.vue`)
+
+새 shadcn-vue 컴포넌트 추가:
 
 ```bash
 pnpm dlx shadcn-vue@latest add [component-name]
@@ -234,6 +269,9 @@ pnpm dlx shadcn-vue@latest add [component-name]
 pnpm dlx shadcn-vue@latest add dialog
 pnpm dlx shadcn-vue@latest add dropdown-menu
 ```
+
+#### Component Playground
+`http://localhost:5173/` (Dashboard 페이지)에서 모든 UI 컴포넌트의 데모와 사용 예시를 확인할 수 있습니다.
 
 ## API 서비스
 
@@ -376,13 +414,27 @@ declare module 'vue-router' {
 
 ### 테마 색상
 
-`src/style.css`에서 테마 색상 수정:
+`src/style.css`에서 테마 색상 수정 (라이트/다크 모드 지원):
 
 ```css
 :root {
-  --primary: 222.2 47.4% 11.2%;
-  --primary-80: 210 40% 98%;
+  /* Base Colors (Light Mode) */
+  --color-base-10: #FFFFFF;
+  --color-base-80: #555C6C;
+
+  /* Primary Colors */
+  --color-primary-80: #3B82F6;
+  --color-primary-100: #1D4ED8;
+
   /* 사용자 정의 색상 추가 */
+}
+
+.dark {
+  /* Base Colors (Dark Mode) */
+  --color-base-10: #1F2937;
+  --color-base-80: #ECEDF0;
+
+  /* Dark mode 색상 오버라이드 */
 }
 ```
 
@@ -392,17 +444,46 @@ declare module 'vue-router' {
 
 ```javascript
 export default {
+  darkMode: ['class'], // 다크 모드 활성화
   theme: {
     extend: {
       colors: {
-        'brand': '#your-color',
+        base: {
+          '10': 'var(--color-base-10)',
+          '80': 'var(--color-base-80)',
+          // ... 추가 색상
+        },
       },
       fontFamily: {
-        sans: ['Your Font', 'sans-serif'],
+        sans: ['Pretendard', 'sans-serif'],
+      },
+      fontSize: {
+        'size-12': ['var(--text-size-12)', { lineHeight: 'var(--text-size-12--line-height)' }],
+        // ... 추가 사이즈
       }
     }
   }
 }
+```
+
+### Button 컴포넌트 커스터마이징
+
+`src/components/ui/button/Button.vue`에서 variant 추가:
+
+```typescript
+const buttonVariants = cva(
+  // 기본 클래스
+  '...',
+  {
+    variants: {
+      variant: {
+        primary: '...',
+        // 새 variant 추가
+        custom: 'bg-custom-color border-custom-color'
+      }
+    }
+  }
+)
 ```
 
 ## 사용 가능한 스크립트

@@ -16,19 +16,24 @@ const inputVariants = cva(
         bottomline: 'border-0 border-b-2 border-base-30 rounded-none bg-transparent',
       },
       size: {
-        small: 'h-8 px-2 py-1 text-size-12',
-        regular: 'h-9 px-3 py-1 text-size-14',
-        large: 'h-10 px-4 py-2 text-size-16',
+        sm: 'h-8 px-2 py-1 text-size-12',
+        md: 'h-9 px-3 py-1 text-size-14',
+        lg: 'h-10 px-4 py-2 text-size-16',
       },
       error: {
         true: 'border-error-70 focus-visible:ring-error-70',
         false: '',
       },
+      readonly: {
+        true: 'cursor-default focus-visible:ring-0 bg-base-10',
+        false: '',
+      },
     },
     defaultVariants: {
       variant: 'default',
-      size: 'regular',
+      size: 'md',
       error: false,
+      readonly: false,
     },
   }
 )
@@ -50,15 +55,13 @@ const wrapperVariants = cva(
 
 export interface EnhancedInputProps {
   variant?: 'default' | 'filled' | 'bottomline'
-  size?: 'small' | 'regular' | 'large'
+  size?: 'sm' | 'md' | 'lg'
   error?: boolean
   modelValue?: string | number
   defaultValue?: string | number
   class?: HTMLAttributes['class']
   label?: string
   required?: boolean
-  iconLeft?: any
-  iconRight?: any
   clearable?: boolean
   password?: boolean
   errorMessage?: string
@@ -74,7 +77,7 @@ export interface EnhancedInputProps {
 
 const props = withDefaults(defineProps<EnhancedInputProps>(), {
   variant: 'default',
-  size: 'regular',
+  size: 'md',
   error: false,
   disabled: false,
   readonly: false,
@@ -135,14 +138,12 @@ const togglePasswordVisibility = () => {
   showPassword.value = !showPassword.value
 }
 
-const hasPaddingLeft = computed(() => !!props.iconLeft)
 const hasPaddingRight = computed(() => {
-  return !!props.iconRight || showClearButton.value || props.password || !!props.subfix
+  return showClearButton.value || props.password || !!props.subfix
 })
 
 const inputPaddingClass = computed(() => {
   return cn(
-    hasPaddingLeft.value && 'pl-10',
     hasPaddingRight.value && 'pr-10'
   )
 })
@@ -161,14 +162,6 @@ const inputPaddingClass = computed(() => {
 
     <!-- Input Wrapper -->
     <div class="relative">
-      <!-- Left Icon -->
-      <div
-        v-if="iconLeft"
-        class="absolute left-3 top-1/2 -translate-y-1/2 text-base-50 pointer-events-none"
-      >
-        <component :is="iconLeft" class="w-4 h-4" />
-      </div>
-
       <!-- Input -->
       <input
         v-model="modelValue"
@@ -181,7 +174,8 @@ const inputPaddingClass = computed(() => {
           inputVariants({
             variant: props.variant,
             size: props.size,
-            error: hasError
+            error: hasError,
+            readonly: props.readonly
           }),
           inputPaddingClass,
           'text-base-80',
@@ -219,11 +213,6 @@ const inputPaddingClass = computed(() => {
           <Eye v-if="!showPassword" class="w-4 h-4" />
           <EyeOff v-else class="w-4 h-4" />
         </button>
-
-        <!-- Right Icon -->
-        <div v-if="iconRight" class="text-base-50">
-          <component :is="iconRight" class="w-4 h-4" />
-        </div>
       </div>
     </div>
 
