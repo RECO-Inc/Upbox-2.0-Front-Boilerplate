@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { computed } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { useI18n } from 'vue-i18n'
+import { useMediaQuery } from '@vueuse/core'
 import { useUserStore } from '@/stores/user'
 import { useNotificationStore } from '@/stores/notification'
 import { saveLocale } from '@/plugins/i18n'
@@ -24,6 +26,10 @@ const route = useRoute()
 const { t, locale } = useI18n()
 const userStore = useUserStore()
 const notiStore = useNotificationStore()
+
+// 모바일에서는 오른쪽, 데스크톱에서는 왼쪽
+const isMobile = useMediaQuery('(max-width: 768px)')
+const sidebarSide = computed(() => isMobile.value ? 'right' : 'left')
 
 const toggleLanguage = () => {
   const newLocale = locale.value === 'ko' ? 'en' : 'ko'
@@ -57,7 +63,7 @@ const isCurrentRoute = (path: string) => {
     </header>
 
     <!-- Sidebar -->
-    <Sidebar side="right" collapsible="icon">
+    <Sidebar :side="sidebarSide" collapsible="icon">
       <SidebarContent>
         <!-- User Info Group -->
         <SidebarGroup>
