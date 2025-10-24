@@ -530,6 +530,20 @@ export const useUserStore = defineStore('user', () => {
     return authorities.some((auth) => hasAuthority(auth));
   }
 
+  /**
+   * # 데모 모드용 사용자 데이터 설정 (GitHub Pages 배포용)
+   */
+  function setDemoUser() {
+    user.value = {
+      id: 1,
+      uuid: 'demo-uuid-12345',
+      userId: 'demo@example.com',
+      name: 'Demo User',
+      authorityList: [Authority.ROLE_PLATFORM_A],
+      authorityMap: {},
+    } as MemberDTO;
+  }
+
   return {
     // State
     user,
@@ -549,6 +563,7 @@ export const useUserStore = defineStore('user', () => {
     setUser: (userData: MemberDTO) => {
       user.value = userData;
     },
+    setDemoUser,
     login,
     logout,
     validateToken,

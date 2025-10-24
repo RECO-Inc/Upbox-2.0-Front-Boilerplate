@@ -65,6 +65,17 @@ router.beforeEach(async (to, from, next) => {
   // Set page title
   document.title = to.meta.title ? `${to.meta.title} | Boilerplate` : 'Boilerplate';
 
+  // Demo mode: Skip authentication for GitHub Pages demo
+  const isDemoMode = import.meta.env.VITE_DEMO_MODE === 'true';
+  if (isDemoMode) {
+    // Set demo user data if not already set
+    if (!userStore.user) {
+      userStore.setDemoUser();
+    }
+    next();
+    return;
+  }
+
   // Check if route requires authentication
   const requiresAuth = to.meta.requiresAuth !== false;
 
