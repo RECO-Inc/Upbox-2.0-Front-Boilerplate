@@ -207,8 +207,8 @@ export default {
       confirm: '확인',
     },
     enhancedInput: {
-      title: '향상된 Input',
-      description: 'LinkFrontApp 스타일의 향상된 입력 필드',
+      title: 'Input',
+      description: '프로젝트 표준 입력 컴포넌트',
       basicTitle: '기본 Input',
       basicLabel: '이름',
       basicPlaceholder: '이름을 입력하세요',
@@ -236,8 +236,8 @@ export default {
       years: '년',
     },
     enhancedTextarea: {
-      title: '향상된 Textarea',
-      description: '자동 크기 조절이 가능한 향상된 텍스트 영역',
+      title: 'Textarea',
+      description: '프로젝트 표준 텍스트 영역 컴포넌트',
       basicTitle: '기본 Textarea',
       basicLabel: '설명',
       basicPlaceholder: '설명을 입력하세요',
@@ -258,8 +258,8 @@ export default {
       placeholder: '여기에 텍스트를 입력하세요',
     },
     enhancedButton: {
-      title: '향상된 Button',
-      description: 'LinkFrontApp 스타일의 향상된 버튼',
+      title: 'Button',
+      description: '프로젝트 표준 버튼 컴포넌트',
       sizesTitle: '크기 변형',
       xsmallButton: 'X-Small',
       smallButton: 'Small',

@@ -24,9 +24,6 @@ import {Calendar} from '@/components/ui/calendar'
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger} from '@/components/ui/drawer'
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog'
-import EnhancedInput from '@/components/ui/input/EnhancedInput.vue'
-import EnhancedTextarea from '@/components/ui/input/EnhancedTextarea.vue'
-import EnhancedButton from '@/components/ui/button/EnhancedButton.vue'
 import {Bold, Calendar as CalendarIcon, Italic, Underline, Mail, User, Search, DollarSign, Heart, Download, ChevronRight} from 'lucide-vue-next'
 import {useDate} from '@/composables/useDate'
 
@@ -153,29 +150,7 @@ const displayDate = computed(() => {
 
             <!-- Inputs Tab -->
             <TabsContent value="inputs" class="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>{{ t('playground.input.title') }}</CardTitle>
-                  <CardDescription>{{ t('playground.input.description') }}</CardDescription>
-                </CardHeader>
-                <CardContent class="space-y-4">
-                  <Input v-model="inputValue" :placeholder="t('playground.input.placeholder')" />
-                  <p class="text-size-14 text-base-60">{{ t('playground.input.value') }}: {{ inputValue }}</p>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>{{ t('playground.textarea.title') }}</CardTitle>
-                  <CardDescription>{{ t('playground.textarea.description') }}</CardDescription>
-                </CardHeader>
-                <CardContent class="space-y-4">
-                  <Textarea v-model="textareaValue" :placeholder="t('playground.textarea.placeholder')" />
-                  <p class="text-size-14 text-base-60">{{ t('playground.input.value') }}: {{ textareaValue }}</p>
-                </CardContent>
-              </Card>
-
-              <!-- Enhanced Input Showcase -->
+              <!-- Input Showcase (LinkFrontApp Style) -->
               <Card>
                 <CardHeader>
                   <CardTitle>{{ t('playground.enhancedInput.title') }}</CardTitle>
@@ -185,7 +160,7 @@ const displayDate = computed(() => {
                   <!-- Basic Input -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.basicTitle') }}</h3>
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedBasicInput"
                       :label="t('playground.enhancedInput.basicLabel')"
                       :placeholder="t('playground.enhancedInput.basicPlaceholder')"
@@ -198,19 +173,19 @@ const displayDate = computed(() => {
                   <!-- Size Variants -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.sizesTitle') }}</h3>
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedSmallInput"
                       :label="t('playground.enhancedInput.smallLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       size="small"
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedRegularInput"
                       :label="t('playground.enhancedInput.regularLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       size="regular"
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedLargeInput"
                       :label="t('playground.enhancedInput.largeLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
@@ -223,19 +198,19 @@ const displayDate = computed(() => {
                   <!-- Style Variants -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.variantsTitle') }}</h3>
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedDefaultInput"
                       :label="t('playground.enhancedInput.defaultLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       variant="default"
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedFilledInput"
                       :label="t('playground.enhancedInput.filledLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       variant="filled"
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedBottomlineInput"
                       :label="t('playground.enhancedInput.bottomlineLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
@@ -248,39 +223,39 @@ const displayDate = computed(() => {
                   <!-- Features -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.featuresTitle') }}</h3>
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedIconInput"
                       :label="t('playground.enhancedInput.withIconsLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       :icon-left="Mail"
                       :icon-right="Search"
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedClearableInput"
                       :label="t('playground.enhancedInput.clearableLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       clearable
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedPasswordInput"
                       :label="t('playground.enhancedInput.passwordLabel')"
                       placeholder="Enter password"
                       password
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedSubfixInput"
                       :label="t('playground.enhancedInput.withSubfixLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       :subfix="t('playground.enhancedInput.years')"
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedCounterInput"
                       :label="t('playground.enhancedInput.withCounterLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       counter
                       :max-length="50"
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedByteInput"
                       :label="t('playground.enhancedInput.withByteCounterLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
@@ -295,19 +270,19 @@ const displayDate = computed(() => {
                   <!-- States -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.statesTitle') }}</h3>
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedErrorInput"
                       :label="t('playground.enhancedInput.errorLabel')"
                       :placeholder="t('playground.enhancedInput.placeholder')"
                       :error-message="t('playground.enhancedInput.errorMessage')"
                       error
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedDisabledInput"
                       :label="t('playground.enhancedInput.disabledLabel')"
                       disabled
                     />
-                    <EnhancedInput
+                    <Input
                       v-model="enhancedReadonlyInput"
                       :label="t('playground.enhancedInput.readonlyLabel')"
                       readonly
@@ -326,7 +301,7 @@ const displayDate = computed(() => {
                   <!-- Basic Textarea -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.basicTitle') }}</h3>
-                    <EnhancedTextarea
+                    <Textarea
                       v-model="enhancedBasicTextarea"
                       :label="t('playground.enhancedTextarea.basicLabel')"
                       :placeholder="t('playground.enhancedTextarea.basicPlaceholder')"
@@ -339,7 +314,7 @@ const displayDate = computed(() => {
                   <!-- Auto Resize -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.autoResizeTitle') }}</h3>
-                    <EnhancedTextarea
+                    <Textarea
                       v-model="enhancedAutoResizeTextarea"
                       :label="t('playground.enhancedTextarea.autoResizeLabel')"
                       :placeholder="t('playground.enhancedTextarea.autoResizePlaceholder')"
@@ -354,7 +329,7 @@ const displayDate = computed(() => {
                   <!-- With Counter -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.withCounterTitle') }}</h3>
-                    <EnhancedTextarea
+                    <Textarea
                       v-model="enhancedCounterTextarea"
                       :label="t('playground.enhancedTextarea.withCounterLabel')"
                       :placeholder="t('playground.enhancedTextarea.withCounterPlaceholder')"
@@ -368,19 +343,19 @@ const displayDate = computed(() => {
                   <!-- Style Variants -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.variantsTitle') }}</h3>
-                    <EnhancedTextarea
+                    <Textarea
                       v-model="enhancedDefaultTextarea"
                       :label="t('playground.enhancedTextarea.defaultLabel')"
                       :placeholder="t('playground.enhancedTextarea.placeholder')"
                       variant="default"
                     />
-                    <EnhancedTextarea
+                    <Textarea
                       v-model="enhancedFilledTextarea"
                       :label="t('playground.enhancedTextarea.filledLabel')"
                       :placeholder="t('playground.enhancedTextarea.placeholder')"
                       variant="filled"
                     />
-                    <EnhancedTextarea
+                    <Textarea
                       v-model="enhancedBottomlineTextarea"
                       :label="t('playground.enhancedTextarea.bottomlineLabel')"
                       :placeholder="t('playground.enhancedTextarea.placeholder')"
@@ -393,14 +368,14 @@ const displayDate = computed(() => {
                   <!-- States -->
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.statesTitle') }}</h3>
-                    <EnhancedTextarea
+                    <Textarea
                       v-model="enhancedErrorTextarea"
                       :label="t('playground.enhancedTextarea.errorLabel')"
                       :placeholder="t('playground.enhancedTextarea.placeholder')"
                       :error-message="t('playground.enhancedTextarea.errorMessage')"
                       error
                     />
-                    <EnhancedTextarea
+                    <Textarea
                       v-model="enhancedDisabledTextarea"
                       :label="t('playground.enhancedTextarea.disabledLabel')"
                       disabled
@@ -474,37 +449,7 @@ const displayDate = computed(() => {
 
             <!-- Buttons Tab -->
             <TabsContent value="buttons" class="space-y-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>{{ t('playground.button.variants') }}</CardTitle>
-                  <CardDescription>{{ t('playground.button.variantsDesc') }}</CardDescription>
-                </CardHeader>
-                <CardContent class="flex flex-wrap gap-4">
-                  <Button variant="primary">{{ t('playground.button.primary') }}</Button>
-                  <Button variant="base">{{ t('playground.button.base') }}</Button>
-                  <Button variant="info">{{ t('playground.button.info') }}</Button>
-                  <Button variant="positive">{{ t('playground.button.positive') }}</Button>
-                  <Button variant="error">{{ t('playground.button.error') }}</Button>
-                  <Button variant="warning">{{ t('playground.button.warning') }}</Button>
-                  <Button variant="outline">{{ t('playground.button.outline') }}</Button>
-                  <Button variant="ghost">{{ t('playground.button.ghost') }}</Button>
-                  <Button variant="link">{{ t('playground.button.link') }}</Button>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle>{{ t('playground.button.sizes') }}</CardTitle>
-                  <CardDescription>{{ t('playground.button.sizesDesc') }}</CardDescription>
-                </CardHeader>
-                <CardContent class="flex flex-wrap items-center gap-4">
-                  <Button size="sm">{{ t('playground.button.small') }}</Button>
-                  <Button size="default">{{ t('playground.button.default') }}</Button>
-                  <Button size="lg">{{ t('playground.button.large') }}</Button>
-                </CardContent>
-              </Card>
-
-              <!-- Enhanced Button Showcase -->
+              <!-- Button Showcase (LinkFrontApp Style) -->
               <Card>
                 <CardHeader>
                   <CardTitle>{{ t('playground.enhancedButton.title') }}</CardTitle>
@@ -515,11 +460,11 @@ const displayDate = computed(() => {
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.sizesTitle') }}</h3>
                     <div class="flex flex-wrap items-center gap-4">
-                      <EnhancedButton size="xsmall">{{ t('playground.enhancedButton.xsmallButton') }}</EnhancedButton>
-                      <EnhancedButton size="small">{{ t('playground.enhancedButton.smallButton') }}</EnhancedButton>
-                      <EnhancedButton size="regular">{{ t('playground.enhancedButton.regularButton') }}</EnhancedButton>
-                      <EnhancedButton size="medium">{{ t('playground.enhancedButton.mediumButton') }}</EnhancedButton>
-                      <EnhancedButton size="large">{{ t('playground.enhancedButton.largeButton') }}</EnhancedButton>
+                      <Button size="xsmall">{{ t('playground.enhancedButton.xsmallButton') }}</Button>
+                      <Button size="small">{{ t('playground.enhancedButton.smallButton') }}</Button>
+                      <Button size="regular">{{ t('playground.enhancedButton.regularButton') }}</Button>
+                      <Button size="medium">{{ t('playground.enhancedButton.mediumButton') }}</Button>
+                      <Button size="large">{{ t('playground.enhancedButton.largeButton') }}</Button>
                     </div>
                   </div>
 
@@ -529,12 +474,12 @@ const displayDate = computed(() => {
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.variantsTitle') }}</h3>
                     <div class="flex flex-wrap gap-4">
-                      <EnhancedButton variant="primary">{{ t('playground.enhancedButton.defaultButton') }}</EnhancedButton>
-                      <EnhancedButton variant="error">{{ t('playground.enhancedButton.errorButton') }}</EnhancedButton>
-                      <EnhancedButton variant="positive">{{ t('playground.enhancedButton.positiveButton') }}</EnhancedButton>
-                      <EnhancedButton variant="usually">{{ t('playground.enhancedButton.usuallyButton') }}</EnhancedButton>
-                      <EnhancedButton variant="assistant">{{ t('playground.enhancedButton.assistantButton') }}</EnhancedButton>
-                      <EnhancedButton variant="info">{{ t('playground.enhancedButton.infoButton') }}</EnhancedButton>
+                      <Button variant="primary">{{ t('playground.enhancedButton.defaultButton') }}</Button>
+                      <Button variant="error">{{ t('playground.enhancedButton.errorButton') }}</Button>
+                      <Button variant="positive">{{ t('playground.enhancedButton.positiveButton') }}</Button>
+                      <Button variant="usually">{{ t('playground.enhancedButton.usuallyButton') }}</Button>
+                      <Button variant="assistant">{{ t('playground.enhancedButton.assistantButton') }}</Button>
+                      <Button variant="info">{{ t('playground.enhancedButton.infoButton') }}</Button>
                     </div>
                   </div>
 
@@ -544,9 +489,9 @@ const displayDate = computed(() => {
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.stylesTitle') }}</h3>
                     <div class="flex flex-wrap gap-4">
-                      <EnhancedButton style="filled">{{ t('playground.enhancedButton.filledButton') }}</EnhancedButton>
-                      <EnhancedButton style="outlined">{{ t('playground.enhancedButton.outlinedButton') }}</EnhancedButton>
-                      <EnhancedButton style="text">{{ t('playground.enhancedButton.textButton') }}</EnhancedButton>
+                      <Button style="filled">{{ t('playground.enhancedButton.filledButton') }}</Button>
+                      <Button style="outlined">{{ t('playground.enhancedButton.outlinedButton') }}</Button>
+                      <Button style="text">{{ t('playground.enhancedButton.textButton') }}</Button>
                     </div>
                   </div>
 
@@ -556,14 +501,14 @@ const displayDate = computed(() => {
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.featuresTitle') }}</h3>
                     <div class="flex flex-wrap gap-4">
-                      <EnhancedButton block>{{ t('playground.enhancedButton.blockButton') }}</EnhancedButton>
-                      <EnhancedButton round>{{ t('playground.enhancedButton.roundButton') }}</EnhancedButton>
-                      <EnhancedButton :loading="isButtonLoading" @click="handleLoadingClick">
+                      <Button block>{{ t('playground.enhancedButton.blockButton') }}</Button>
+                      <Button round>{{ t('playground.enhancedButton.roundButton') }}</Button>
+                      <Button :loading="isButtonLoading" @click="handleLoadingClick">
                         {{ t('playground.enhancedButton.loadingButton') }}
-                      </EnhancedButton>
-                      <EnhancedButton :icon-left="Heart">{{ t('playground.enhancedButton.withIconLeft') }}</EnhancedButton>
-                      <EnhancedButton :icon-right="ChevronRight">{{ t('playground.enhancedButton.withIconRight') }}</EnhancedButton>
-                      <EnhancedButton :icon-only="Download" />
+                      </Button>
+                      <Button :icon-left="Heart">{{ t('playground.enhancedButton.withIconLeft') }}</Button>
+                      <Button :icon-right="ChevronRight">{{ t('playground.enhancedButton.withIconRight') }}</Button>
+                      <Button :icon-only="Download" />
                     </div>
                   </div>
 
@@ -573,9 +518,9 @@ const displayDate = computed(() => {
                   <div class="space-y-4">
                     <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedButton.statesTitle') }}</h3>
                     <div class="flex flex-wrap gap-4">
-                      <EnhancedButton disabled>{{ t('playground.enhancedButton.disabledButton') }}</EnhancedButton>
-                      <EnhancedButton variant="error" disabled>{{ t('playground.enhancedButton.disabledButton') }}</EnhancedButton>
-                      <EnhancedButton style="outlined" disabled>{{ t('playground.enhancedButton.disabledButton') }}</EnhancedButton>
+                      <Button disabled>{{ t('playground.enhancedButton.disabledButton') }}</Button>
+                      <Button variant="error" disabled>{{ t('playground.enhancedButton.disabledButton') }}</Button>
+                      <Button style="outlined" disabled>{{ t('playground.enhancedButton.disabledButton') }}</Button>
                     </div>
                   </div>
                 </CardContent>

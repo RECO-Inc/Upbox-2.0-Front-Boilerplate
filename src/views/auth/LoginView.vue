@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useForm } from 'vee-validate'
 import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
+import { SimpleInput } from '@/components/ui/input'
 import { Spinner } from '@/components/ui/spinner'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { useI18n } from 'vue-i18n'
@@ -63,7 +63,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             <FormItem>
               <FormLabel>{{ t('auth.userId') }}</FormLabel>
               <FormControl>
-                <Input
+                <SimpleInput
                   v-bind="componentField"
                   type="text"
                   :placeholder="t('auth.userId')" />
@@ -77,7 +77,7 @@ const onSubmit = form.handleSubmit(async (values) => {
             <FormItem>
               <FormLabel>{{ t('auth.password') }}</FormLabel>
               <FormControl>
-                <Input
+                <SimpleInput
                   v-bind="componentField"
                   type="password"
                   :placeholder="t('auth.password')" />

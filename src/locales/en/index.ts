@@ -207,8 +207,8 @@ export default {
       confirm: 'Confirm',
     },
     enhancedInput: {
-      title: 'Enhanced Input',
-      description: 'LinkFrontApp-style enhanced input field',
+      title: 'Input (LinkFrontApp Style)',
+      description: 'Project standard input component',
       basicTitle: 'Basic Input',
       basicLabel: 'Name',
       basicPlaceholder: 'Enter your name',
@@ -236,8 +236,8 @@ export default {
       years: 'years',
     },
     enhancedTextarea: {
-      title: 'Enhanced Textarea',
-      description: 'Enhanced text area with auto-resize',
+      title: 'Textarea (LinkFrontApp Style)',
+      description: 'Project standard textarea component',
       basicTitle: 'Basic Textarea',
       basicLabel: 'Description',
       basicPlaceholder: 'Enter description',
@@ -258,8 +258,8 @@ export default {
       placeholder: 'Enter text here',
     },
     enhancedButton: {
-      title: 'Enhanced Button',
-      description: 'LinkFrontApp-style enhanced button',
+      title: 'Button (LinkFrontApp Style)',
+      description: 'Project standard button component',
       sizesTitle: 'Size Variants',
       xsmallButton: 'X-Small',
       smallButton: 'Small',
