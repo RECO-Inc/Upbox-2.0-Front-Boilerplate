@@ -1,0 +1,148 @@
+@import "pretendard/dist/web/static/pretendard.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Text sizes - matching project pattern */
+    --text-size-9: 0.56rem;
+    --text-size-9--line-height: 0.84rem;
+    --text-size-10: 0.62rem;
+    --text-size-10--line-height: 0.92rem;
+    --text-size-11: 0.688rem;
+    --text-size-11--line-height: 1rem;
+    --text-size-12: 0.750rem;
+    --text-size-12--line-height: 1rem;
+    --text-size-13: 0.813rem;
+    --text-size-13--line-height: 1.250rem;
+    --text-size-14: 0.875rem;
+    --text-size-14--line-height: 1.250rem;
+    --text-size-15: 0.938rem;
+    --text-size-15--line-height: 1.5rem;
+    --text-size-16: 1rem;
+    --text-size-16--line-height: 1.5rem;
+    --text-size-18: 1.125rem;
+    --text-size-18--line-height: 1.75rem;
+    --text-size-20: 1.250rem;
+    --text-size-20--line-height: 1.75rem;
+    --text-size-22: 1.375rem;
+    --text-size-22--line-height: 2rem;
+    --text-size-24: 1.5rem;
+    --text-size-24--line-height: 2rem;
+    --text-size-28: 1.75rem;
+    --text-size-28--line-height: 2.25rem;
+    --text-size-32: 2rem;
+    --text-size-32--line-height: 3rem;
+
+    /* Font weights */
+    --font-weight-thin: 100;
+    --font-weight-extralight: 200;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+    --font-weight-extrabold: 800;
+    --font-weight-black: 900;
+
+    /* Base colors - matching project's --color-base-XX pattern */
+    --color-base-10: #FFFFFF;
+    --color-base-20: #F8F8F9;
+    --color-base-30: #ECEDF0;
+    --color-base-40: #D3D6DE;
+    --color-base-50: #AFB4BF;
+    --color-base-60: #8E94A3;
+    --color-base-70: #6F7789;
+    --color-base-80: #555C6C;
+    --color-base-90: #303445;
+    --color-base-100: #0D152A;
+
+    /* Primary colors */
+    --color-primary-20: #F4F7FC;
+    --color-primary-30: #DAE7F5;
+    --color-primary-40: #C5D6EC;
+    --color-primary-50: #85A2C7;
+    --color-primary-60: #4D7099;
+    --color-primary-70: #385B85;
+    --color-primary-80: #264870;
+    --color-primary-90: #1D3756;
+    --color-primary-100: #081E38;
+
+    /* Info colors (blue accent) */
+    --color-info-20: #F5F9FF;
+    --color-info-30: #E1EDFF;
+    --color-info-40: #B9D5FF;
+    --color-info-50: #93BEFF;
+    --color-info-60: #64A2FF;
+    --color-info-70: #3D8BFF;
+    --color-info-80: #0066FF;
+    --color-info-90: #004FC5;
+    --color-info-100: #003C96;
+
+    /* Positive/Success colors */
+    --color-positive-20: #F1F9F6;
+    --color-positive-30: #DBEEE9;
+    --color-positive-40: #B3D7CC;
+    --color-positive-50: #8EC0B1;
+    --color-positive-60: #66AF99;
+    --color-positive-70: #4DA288;
+    --color-positive-80: #1A8766;
+    --color-positive-90: #107B5A;
+    --color-positive-100: #006E4D;
+
+    /* Error colors */
+    --color-error-20: #FFF6F6;
+    --color-error-30: #FBEAEA;
+    --color-error-40: #FDC9C9;
+    --color-error-50: #F8A8A8;
+    --color-error-60: #F27D7E;
+    --color-error-70: #ED4242;
+    --color-error-80: #E11D1D;
+    --color-error-90: #C21919;
+    --color-error-100: #851111;
+
+    /* Warning colors */
+    --color-warning-20: #FFF2E4;
+    --color-warning-30: #FFE9D1;
+    --color-warning-40: #FFDBB3;
+    --color-warning-50: #FFBB63;
+    --color-warning-60: #FFA037;
+    --color-warning-70: #F68511;
+    --color-warning-80: #E46F00;
+    --color-warning-90: #CB5D00;
+    --color-warning-100: #B14C00;
+
+    /* Shadcn mappings to project colors */
+    --radius: 0.125rem; /* 2px - matching project default */
+  }
+
+  .dark {
+    /* Dark mode - inverted base colors */
+    --color-base-10: #0D152A;
+    --color-base-20: #303445;
+    --color-base-30: #555C6C;
+    --color-base-40: #6F7789;
+    --color-base-50: #8E94A3;
+    --color-base-60: #AFB4BF;
+    --color-base-70: #D3D6DE;
+    --color-base-80: #ECEDF0;
+    --color-base-90: #F8F8F9;
+    --color-base-100: #FFFFFF;
+
+    /* Dark mode primary colors - inverted */
+    --color-primary-20: #081E38;
+    --color-primary-30: #1D3756;
+    --color-primary-40: #264870;
+    --color-primary-50: #385B85;
+    --color-primary-60: #4D7099;
+    --color-primary-70: #85A2C7;
+    --color-primary-80: #C5D6EC;
+    --color-primary-90: #DAE7F5;
+    --color-primary-100: #F4F7FC;
+  }
+}
+
+@layer base {
+}
