@@ -15,7 +15,7 @@ export default defineConfig({
     // 서버 API 용 프록시 정보를 추가한다.
     proxy: {
       '/api': {
-        target: "http://192.168.0.11:9090",
+        target: "https://admin2.recobora.com",
         // target: "http://172.16.1.173:9091",
         // target: process.env.VITE_PROXY_HOST,
         changeOrigin: true,

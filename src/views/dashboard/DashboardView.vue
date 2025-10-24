@@ -24,7 +24,9 @@ import {Calendar} from '@/components/ui/calendar'
 import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover'
 import {Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger} from '@/components/ui/drawer'
 import {Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog'
-import {Bold, Calendar as CalendarIcon, Italic, Underline} from 'lucide-vue-next'
+import EnhancedInput from '@/components/ui/input/EnhancedInput.vue'
+import EnhancedTextarea from '@/components/ui/input/EnhancedTextarea.vue'
+import {Bold, Calendar as CalendarIcon, Italic, Underline, Mail, User, Search, DollarSign} from 'lucide-vue-next'
 import {useDate} from '@/composables/useDate'
 
 const {t, locale} = useI18n()
@@ -39,6 +41,34 @@ const toggleValue = ref(false)
 const toggleGroupValue = ref('center')
 const calendarDate = ref<DateValue>()
 const isCalendarOpen = ref(false)
+
+// Enhanced Input states
+const enhancedBasicInput = ref('')
+const enhancedSmallInput = ref('')
+const enhancedRegularInput = ref('')
+const enhancedLargeInput = ref('')
+const enhancedDefaultInput = ref('')
+const enhancedFilledInput = ref('')
+const enhancedBottomlineInput = ref('')
+const enhancedIconInput = ref('')
+const enhancedClearableInput = ref('')
+const enhancedPasswordInput = ref('')
+const enhancedSubfixInput = ref('25')
+const enhancedCounterInput = ref('')
+const enhancedByteInput = ref('')
+const enhancedErrorInput = ref('')
+const enhancedDisabledInput = ref('Disabled value')
+const enhancedReadonlyInput = ref('Readonly value')
+
+// Enhanced Textarea states
+const enhancedBasicTextarea = ref('')
+const enhancedAutoResizeTextarea = ref('')
+const enhancedCounterTextarea = ref('')
+const enhancedDefaultTextarea = ref('')
+const enhancedFilledTextarea = ref('')
+const enhancedBottomlineTextarea = ref('')
+const enhancedErrorTextarea = ref('')
+const enhancedDisabledTextarea = ref('Disabled textarea')
 
 // Date utilities
 const dateUtil = useDate()
@@ -132,6 +162,240 @@ const displayDate = computed(() => {
                 <CardContent class="space-y-4">
                   <Textarea v-model="textareaValue" :placeholder="t('playground.textarea.placeholder')" />
                   <p class="text-size-14 text-base-60">{{ t('playground.input.value') }}: {{ textareaValue }}</p>
+                </CardContent>
+              </Card>
+
+              <!-- Enhanced Input Showcase -->
+              <Card>
+                <CardHeader>
+                  <CardTitle>{{ t('playground.enhancedInput.title') }}</CardTitle>
+                  <CardDescription>{{ t('playground.enhancedInput.description') }}</CardDescription>
+                </CardHeader>
+                <CardContent class="space-y-8">
+                  <!-- Basic Input -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.basicTitle') }}</h3>
+                    <EnhancedInput
+                      v-model="enhancedBasicInput"
+                      :label="t('playground.enhancedInput.basicLabel')"
+                      :placeholder="t('playground.enhancedInput.basicPlaceholder')"
+                      required
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <!-- Size Variants -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.sizesTitle') }}</h3>
+                    <EnhancedInput
+                      v-model="enhancedSmallInput"
+                      :label="t('playground.enhancedInput.smallLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      size="small"
+                    />
+                    <EnhancedInput
+                      v-model="enhancedRegularInput"
+                      :label="t('playground.enhancedInput.regularLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      size="regular"
+                    />
+                    <EnhancedInput
+                      v-model="enhancedLargeInput"
+                      :label="t('playground.enhancedInput.largeLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      size="large"
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <!-- Style Variants -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.variantsTitle') }}</h3>
+                    <EnhancedInput
+                      v-model="enhancedDefaultInput"
+                      :label="t('playground.enhancedInput.defaultLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      variant="default"
+                    />
+                    <EnhancedInput
+                      v-model="enhancedFilledInput"
+                      :label="t('playground.enhancedInput.filledLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      variant="filled"
+                    />
+                    <EnhancedInput
+                      v-model="enhancedBottomlineInput"
+                      :label="t('playground.enhancedInput.bottomlineLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      variant="bottomline"
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <!-- Features -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.featuresTitle') }}</h3>
+                    <EnhancedInput
+                      v-model="enhancedIconInput"
+                      :label="t('playground.enhancedInput.withIconsLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      :icon-left="Mail"
+                      :icon-right="Search"
+                    />
+                    <EnhancedInput
+                      v-model="enhancedClearableInput"
+                      :label="t('playground.enhancedInput.clearableLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      clearable
+                    />
+                    <EnhancedInput
+                      v-model="enhancedPasswordInput"
+                      :label="t('playground.enhancedInput.passwordLabel')"
+                      placeholder="Enter password"
+                      password
+                    />
+                    <EnhancedInput
+                      v-model="enhancedSubfixInput"
+                      :label="t('playground.enhancedInput.withSubfixLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      :subfix="t('playground.enhancedInput.years')"
+                    />
+                    <EnhancedInput
+                      v-model="enhancedCounterInput"
+                      :label="t('playground.enhancedInput.withCounterLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      counter
+                      :max-length="50"
+                    />
+                    <EnhancedInput
+                      v-model="enhancedByteInput"
+                      :label="t('playground.enhancedInput.withByteCounterLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      counter
+                      byte-mode
+                      :max-length="100"
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <!-- States -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedInput.statesTitle') }}</h3>
+                    <EnhancedInput
+                      v-model="enhancedErrorInput"
+                      :label="t('playground.enhancedInput.errorLabel')"
+                      :placeholder="t('playground.enhancedInput.placeholder')"
+                      :error-message="t('playground.enhancedInput.errorMessage')"
+                      error
+                    />
+                    <EnhancedInput
+                      v-model="enhancedDisabledInput"
+                      :label="t('playground.enhancedInput.disabledLabel')"
+                      disabled
+                    />
+                    <EnhancedInput
+                      v-model="enhancedReadonlyInput"
+                      :label="t('playground.enhancedInput.readonlyLabel')"
+                      readonly
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              <!-- Enhanced Textarea Showcase -->
+              <Card>
+                <CardHeader>
+                  <CardTitle>{{ t('playground.enhancedTextarea.title') }}</CardTitle>
+                  <CardDescription>{{ t('playground.enhancedTextarea.description') }}</CardDescription>
+                </CardHeader>
+                <CardContent class="space-y-8">
+                  <!-- Basic Textarea -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.basicTitle') }}</h3>
+                    <EnhancedTextarea
+                      v-model="enhancedBasicTextarea"
+                      :label="t('playground.enhancedTextarea.basicLabel')"
+                      :placeholder="t('playground.enhancedTextarea.basicPlaceholder')"
+                      required
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <!-- Auto Resize -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.autoResizeTitle') }}</h3>
+                    <EnhancedTextarea
+                      v-model="enhancedAutoResizeTextarea"
+                      :label="t('playground.enhancedTextarea.autoResizeLabel')"
+                      :placeholder="t('playground.enhancedTextarea.autoResizePlaceholder')"
+                      auto-resize
+                      :min-height="60"
+                      :max-height="200"
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <!-- With Counter -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.withCounterTitle') }}</h3>
+                    <EnhancedTextarea
+                      v-model="enhancedCounterTextarea"
+                      :label="t('playground.enhancedTextarea.withCounterLabel')"
+                      :placeholder="t('playground.enhancedTextarea.withCounterPlaceholder')"
+                      counter
+                      :max-length="200"
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <!-- Style Variants -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.variantsTitle') }}</h3>
+                    <EnhancedTextarea
+                      v-model="enhancedDefaultTextarea"
+                      :label="t('playground.enhancedTextarea.defaultLabel')"
+                      :placeholder="t('playground.enhancedTextarea.placeholder')"
+                      variant="default"
+                    />
+                    <EnhancedTextarea
+                      v-model="enhancedFilledTextarea"
+                      :label="t('playground.enhancedTextarea.filledLabel')"
+                      :placeholder="t('playground.enhancedTextarea.placeholder')"
+                      variant="filled"
+                    />
+                    <EnhancedTextarea
+                      v-model="enhancedBottomlineTextarea"
+                      :label="t('playground.enhancedTextarea.bottomlineLabel')"
+                      :placeholder="t('playground.enhancedTextarea.placeholder')"
+                      variant="bottomline"
+                    />
+                  </div>
+
+                  <Separator />
+
+                  <!-- States -->
+                  <div class="space-y-4">
+                    <h3 class="text-size-16 font-semibold text-base-80">{{ t('playground.enhancedTextarea.statesTitle') }}</h3>
+                    <EnhancedTextarea
+                      v-model="enhancedErrorTextarea"
+                      :label="t('playground.enhancedTextarea.errorLabel')"
+                      :placeholder="t('playground.enhancedTextarea.placeholder')"
+                      :error-message="t('playground.enhancedTextarea.errorMessage')"
+                      error
+                    />
+                    <EnhancedTextarea
+                      v-model="enhancedDisabledTextarea"
+                      :label="t('playground.enhancedTextarea.disabledLabel')"
+                      disabled
+                    />
+                  </div>
                 </CardContent>
               </Card>
 

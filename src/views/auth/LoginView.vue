@@ -4,9 +4,9 @@ import { useRouter } from 'vue-router'
 import { useForm } from 'vee-validate'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Spinner } from '@/components/ui/spinner'
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { useI18n } from 'vue-i18n'
-import { useLoadingStore } from '@/stores/loading'
 import { useNotificationStore } from '@/stores/notification'
 import { useUserStore } from '@/stores/user'
 import { useLoginSchema } from '@/schemas/auth.schema'
@@ -15,9 +15,9 @@ const router = useRouter()
 const { t } = useI18n()
 const userStore = useUserStore()
 const notiStore = useNotificationStore()
-const loadingStore = useLoadingStore()
 
 const isRemember = ref(false)
+const isLoading = ref(false)
 
 // Setup VeeValidate form
 const form = useForm({
@@ -26,7 +26,7 @@ const form = useForm({
 
 const onSubmit = form.handleSubmit(async (values) => {
   try {
-    loadingStore.startLoading('login')
+    isLoading.value = true
 
     // User Store의 login 함수 사용 (평문 비밀번호, 로그인 유지 여부)
     const result = await userStore.login(values.userId, values.password, isRemember.value)
@@ -44,7 +44,7 @@ const onSubmit = form.handleSubmit(async (values) => {
     console.error('Login failed:', error)
     notiStore.error(error.response?.data?.errorMessage || error.message || t('auth.loginFailed'))
   } finally {
-    loadingStore.stopLoading('login')
+    isLoading.value = false
   }
 });
 </script>
@@ -104,7 +104,8 @@ const onSubmit = form.handleSubmit(async (values) => {
           <Button
             class="w-full"
             type="submit"
-            :disabled="loadingStore.isLoading">
+            :disabled="isLoading">
+            <Spinner v-if="isLoading" class="mr-2" />
             {{ t('auth.loginButton') }}
           </Button>
         </div>
