@@ -53,7 +53,7 @@ export const inputGroupButtonVariants = cva(
 export type InputGroupButtonVariants = VariantProps<typeof inputGroupButtonVariants>
 
 export interface InputGroupButtonProps {
-  variant?: ButtonVariants["variant"]
+  variant?: ButtonVariants["variant"] | null
   size?: InputGroupButtonVariants["size"]
   class?: HTMLAttributes["class"]
 }

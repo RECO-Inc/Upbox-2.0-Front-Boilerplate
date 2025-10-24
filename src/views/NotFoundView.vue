@@ -25,7 +25,7 @@ const goBack = () => {
         <Button @click="goBack">
           Go Back
         </Button>
-        <Button variant="outline" @click="goHome">
+        <Button variant="assistant" button-style="outlined" @click="goHome">
           Go Home
         </Button>
       </div>

@@ -12,7 +12,7 @@ const props = withDefaults(defineProps<PaginationListItemProps & {
   class?: HTMLAttributes["class"]
   isActive?: boolean
 }>(), {
-  size: "icon",
+  size: "sm",
 })
 
 const delegatedProps = reactiveOmit(props, "class", "size", "isActive")
@@ -24,7 +24,8 @@ const delegatedProps = reactiveOmit(props, "class", "size", "isActive")
     v-bind="delegatedProps"
     :class="cn(
       buttonVariants({
-        variant: isActive ? 'outline' : 'ghost',
+        variant: isActive ? 'primary' : 'assistant',
+        style: isActive ? 'filled' : 'outlined',
         size,
       }),
       props.class)"

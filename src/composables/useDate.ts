@@ -158,7 +158,7 @@ export const useDate = () => {
   /**
    * Create duration
    */
-  const duration = (time: number, unit?: dayjs.DurationUnitType) => {
+  const duration = (time: number, unit?: 'millisecond' | 'second' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year') => {
     return dayjs.duration(time, unit)
   }
 
