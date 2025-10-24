@@ -9,7 +9,8 @@
       "Read(//Users/parkjh/Documents/dev/Upbox-2.0-Front-Boilerplate/LinkFrontApp/src/**)",
       "Bash(cat:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(VITE_DEMO_MODE=true pnpm build:*)"
+      "Bash(VITE_DEMO_MODE=true pnpm build:*)",
+      "Bash(pnpm dev)"
     ],
     "deny": [],
     "ask": []

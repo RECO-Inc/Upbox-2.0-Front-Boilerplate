@@ -390,11 +390,11 @@ const displayDate = computed(() => {
                 </CardHeader>
                 <CardContent class="space-y-4">
                   <div class="flex items-center space-x-2">
-                    <Checkbox id="terms" v-model:checked="checkboxValue" />
+                    <Checkbox id="terms" v-model="checkboxValue" />
                     <label for="terms" class="text-size-14 font-medium">{{ t('playground.checkbox.acceptTerms') }}</label>
                   </div>
                   <div class="flex items-center space-x-2">
-                    <Switch id="airplane" v-model:checked="switchValue" />
+                    <Switch id="airplane" v-model="switchValue" />
                     <label for="airplane" class="text-size-14 font-medium">{{ t('playground.checkbox.airplaneMode') }}</label>
                   </div>
                   <p class="text-size-14 text-base-60">{{ t('playground.checkbox.checkboxLabel') }}: {{ checkboxValue }}, {{ t('playground.checkbox.switchLabel') }}: {{ switchValue }}</p>
@@ -565,7 +565,7 @@ const displayDate = computed(() => {
                   <CardDescription>{{ t('playground.toggle.description') }}</CardDescription>
                 </CardHeader>
                 <CardContent class="space-y-4">
-                  <Toggle v-model:pressed="toggleValue" aria-label="Toggle italic">
+                  <Toggle v-model="toggleValue" aria-label="Toggle italic">
                     <Italic class="h-4 w-4" />
                   </Toggle>
                   <p class="text-size-14 text-base-60">{{ t('playground.toggle.pressed') }}: {{ toggleValue }}</p>
