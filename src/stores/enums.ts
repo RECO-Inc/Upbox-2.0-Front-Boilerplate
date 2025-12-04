@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ref, reactive } from 'vue'
+import { ref } from 'vue'
 import type { EnumDictionary } from '@/utils/enum'
 
 export enum EnumKey {
@@ -7,24 +7,16 @@ export enum EnumKey {
     DISPOSALMETHOD = 'DISPOSALMETHOD'
 }
 
-interface EnumsState {
-    getEnumsDic: (key: string) => EnumDictionary<string>
-    setEnumsDic: (key: string, value: EnumDictionary<string>) => void
-    promiseLock: Record<string, Promise<any> | undefined>
-    getPromiseLock: (key: string) => Promise<any> | undefined
-    setPromiseLock: (key: string, promise: Promise<any> | undefined) => void
-}
-
 export const useEnumsStore = defineStore('enums', () => {
-    const enumsDic = reactive<Map<string, EnumDictionary<string>>>(new Map())
+    const enumsDic = ref<Record<string, EnumDictionary<string>>>({})
     const promiseLock = ref<Record<string, Promise<any> | undefined>>({})
 
     function getEnumsDic(key: string): EnumDictionary<string> {
-        return enumsDic.get(key) || {}
+        return enumsDic.value[key] || {}
     }
 
     function setEnumsDic(key: string, dic: EnumDictionary<string>) {
-        enumsDic.set(key, dic)
+        enumsDic.value = { ...enumsDic.value, [key]: dic }
     }
 
     function getPromiseLock(key: string): Promise<any> | undefined {
@@ -36,6 +28,7 @@ export const useEnumsStore = defineStore('enums', () => {
     }
 
     return {
+        enumsDic,
         getEnumsDic,
         setEnumsDic,
         promiseLock,

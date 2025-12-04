@@ -10,22 +10,27 @@ import 'vue-sonner/style.css'
 
 const loadingStore = useLoadingStore()
 const userStore = useUserStore()
-const { fetchWasteTypeEnums } = useWasteType()
+const { initWasteTypeEnums } = useWasteType()
 
 // Watch for authentication state changes
 watch(
   () => userStore.isAuthenticated,
   async (isAuthenticated) => {
     if (isAuthenticated) {
-      await fetchWasteTypeEnums()
+      await initWasteTypeEnums()
     }
   },
   { immediate: true }
 )
 
-onMounted(() => {
+onMounted(async () => {
   if (import.meta.env.DEV) {
     console.log('[App] Application mounted')
+  }
+  try {
+    await userStore.validateToken()
+  } catch (error) {
+    console.error('Failed to validate token', error)
   }
 })
 </script>

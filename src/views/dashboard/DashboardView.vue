@@ -33,7 +33,10 @@ import {Pagination, PaginationContent, PaginationEllipsis, PaginationFirst, Pagi
 import {Bold, Calendar as CalendarIcon, Italic, Underline, Heart, Download, ChevronRight, Minus, Plus} from 'lucide-vue-next'
 import {useDate} from '@/composables/useDate'
 
+import {useWasteType} from '@/composables/useWasteType'
+
 const {t, locale} = useI18n()
+const { wasteTypeDetailOptions } = useWasteType()
 
 const inputValue = ref('')
 const textareaValue = ref('')
@@ -46,15 +49,7 @@ const selectValue = ref('')
 const multiFilterValue = ref<string[]>([])
 const singleFilterValue = ref<string[]>([])
 const searchFilterValue = ref<string[]>([])
-const highlightFilterValue = ref<string[]>(['apple', 'banana'])
-const filterOptions = [
-  { label: 'Apple', value: 'apple' },
-  { label: 'Banana', value: 'banana' },
-  { label: 'Orange', value: 'orange' },
-  { label: 'Grape', value: 'grape' },
-  { label: 'Watermelon', value: 'watermelon' },
-  { label: 'Strawberry', value: 'strawberry' },
-]
+const highlightFilterValue = ref<string[]>([])
 const toggleValue = ref(false)
 const toggleGroupValue = ref('center')
 const calendarDate = ref<DateValue>()
@@ -473,7 +468,7 @@ const displayDate = computed(() => {
                     <label class="text-size-14 font-medium">{{ t('ui.component.dropdownFilter.multiSelectLabel') }}</label>
                     <DropdownFilter
                       v-model="multiFilterValue"
-                      :options="filterOptions"
+                      :options="wasteTypeDetailOptions"
                       :placeholder="t('playground.select.placeholder')"
                     />
                     <p class="text-size-12 text-base-60">{{ t('playground.select.selected') }}: {{ multiFilterValue.join(', ') || '-' }}</p>
@@ -484,7 +479,7 @@ const displayDate = computed(() => {
                     <label class="text-size-14 font-medium">{{ t('ui.component.dropdownFilter.singleSelectLabel') }}</label>
                     <DropdownFilter
                       v-model="singleFilterValue"
-                      :options="filterOptions"
+                      :options="wasteTypeDetailOptions"
                       :placeholder="t('playground.select.placeholder')"
                       single
                     />
@@ -496,7 +491,7 @@ const displayDate = computed(() => {
                     <label class="text-size-14 font-medium">{{ t('ui.component.dropdownFilter.searchableLabel') }}</label>
                     <DropdownFilter
                       v-model="searchFilterValue"
-                      :options="filterOptions"
+                      :options="wasteTypeDetailOptions"
                       :placeholder="t('playground.select.placeholder')"
                       search
                     />
@@ -508,7 +503,7 @@ const displayDate = computed(() => {
                     <label class="text-size-14 font-medium">{{ t('ui.component.dropdownFilter.highlightLabel') }}</label>
                     <DropdownFilter
                       v-model="highlightFilterValue"
-                      :options="filterOptions"
+                      :options="wasteTypeDetailOptions"
                       :placeholder="t('playground.select.placeholder')"
                       display-style="highlight"
                     />
