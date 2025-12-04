@@ -1,12 +1,27 @@
 <script setup lang="ts">
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import { RouterView } from 'vue-router'
 import { useLoadingStore } from '@/stores/loading'
+import { useUserStore } from '@/stores/user'
+import { useWasteType } from '@/composables/useWasteType'
 import { Toaster } from '@/components/ui/sonner'
 import LoadingOverlay from '@/components/common/LoadingOverlay.vue'
 import 'vue-sonner/style.css'
 
 const loadingStore = useLoadingStore()
+const userStore = useUserStore()
+const { fetchWasteTypeEnums } = useWasteType()
+
+// Watch for authentication state changes
+watch(
+  () => userStore.isAuthenticated,
+  async (isAuthenticated) => {
+    if (isAuthenticated) {
+      await fetchWasteTypeEnums()
+    }
+  },
+  { immediate: true }
+)
 
 onMounted(() => {
   if (import.meta.env.DEV) {
