@@ -7,7 +7,7 @@ import { X, Eye, EyeOff } from 'lucide-vue-next'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 const inputVariants = cva(
-  'flex w-full rounded-md border transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-base-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-80 disabled:cursor-not-allowed disabled:opacity-50',
+  'flex w-full rounded-[4px] border transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-base-50 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-80 disabled:cursor-not-allowed disabled:opacity-50',
   {
     variants: {
       variant: {
@@ -25,7 +25,7 @@ const inputVariants = cva(
         false: '',
       },
       readonly: {
-        true: 'cursor-default focus-visible:ring-0 bg-base-10',
+        true: 'cursor-default focus-visible:ring-0 bg-base-20',
         false: '',
       },
     },

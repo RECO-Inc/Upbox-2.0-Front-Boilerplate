@@ -1,23 +1,23 @@
-import { computed, ref } from 'vue';
-import { defineStore } from 'pinia';
-import dayjs from 'dayjs';
-import { jwtDecode } from 'jwt-decode';
-import _isEqual from 'lodash/isEqual';
-import { axiosInstance } from '@/api/request';
-import type { MemberDTO } from '@/api/dto/MemberDTO';
-import type { AuthLoginInfo } from '@/api/dto/AuthLoginInfo';
-import type { AuthResponse } from '@/api/dto/AuthResponse';
-import type { JwtPayload } from '@/api/dto/JwtPayload';
-import type { RespRefreshTokenDTO } from '@/api/dto/RespRefreshTokenDTO';
-import type { UserToken } from '@/types/auth';
-import { Authority } from '@/types/enums/Authority';
-import type { AuthorityInfo, AuthorityKey } from '@/types/enums/Authority';
-import { KeyState } from '@/types/enums/KeyState';
-import type ApiResponse from '@/types/api';
-import { useNotificationStore } from './notification';
-import { useLoadingStore } from './loading';
-import { hashedPassword } from '@/utils/auth';
-import { isAndroid, isiOS } from '@/utils/os';
+import {computed, ref} from "vue";
+import {defineStore} from "pinia";
+import dayjs from "dayjs";
+import {jwtDecode} from "jwt-decode";
+import _isEqual from "lodash/isEqual";
+import {axiosInstance} from "@/api/request";
+import type {MemberDTO} from "@/api/dto/MemberDTO";
+import type {AuthLoginInfo} from "@/api/dto/AuthLoginInfo";
+import type {AuthResponse} from "@/api/dto/AuthResponse";
+import type {JwtPayload} from "@/api/dto/JwtPayload";
+import type {RespRefreshTokenDTO} from "@/api/dto/RespRefreshTokenDTO";
+import type {UserToken} from "@/types/auth";
+import type {AuthorityInfo} from "@/types/enums/Authority";
+import {Authority, AuthorityDic} from "@/types/enums/Authority";
+import {KeyState} from "@/types/enums/KeyState";
+import type ApiResponse from "@/types/api";
+import {useNotificationStore} from "./notification";
+import {hashedPassword} from "@/utils/auth";
+import {isAndroid, isiOS} from "@/utils/os";
+import i18n from "@/plugins/i18n";
 
 const SAVEKEY = 'AuthKey';
 const CREDENTIAL = 'Credential';
@@ -66,10 +66,115 @@ export const useUserStore = defineStore('user', () => {
     return '';
   });
 
+  const userImage = computed(() => {
+    if (user.value && user.value.fileDTO?.s3URL) {
+      return `${user.value.fileDTO.s3URL}${user.value.fileDTO.fileName}`;
+    }
+    return '';
+  });
+
   const isAuthenticated = computed(() => !!token.value?.accessToken && !!user.value?.id);
 
   const isPlatformAdmin = computed<boolean>(() => {
     return selectedAuthority.value?.authority === Authority.ROLE_PLATFORM_A;
+  });
+  // 고객인지 확인
+  const isCustomerMember = computed<boolean>(() => {
+    return selectedAuthority.value?.authority === Authority.ROLE_CUSTOMER;
+  })
+
+  // 기사인지
+  const isDriverMember = computed<boolean>(() => {
+    if (!selectedAuthority.value) return false;
+    if(!AuthorityDic[selectedAuthority.value?.authority]) return false;
+    const code = AuthorityDic[selectedAuthority.value?.authority].code;
+    return code % 10 === 2;
+  })
+
+  // 매니저 계정
+  const isManagerMember = computed<boolean>(() => {
+    if (!selectedAuthority.value) return false;
+    if(!AuthorityDic[selectedAuthority.value?.authority]) return false;
+    const code = AuthorityDic[selectedAuthority.value?.authority].code;
+    return code % 10 === 1;
+  })
+  // 파트너계정 (파트너, 매니저)
+  const isPartnerMember = computed<boolean>(() => {
+    if (!selectedAuthority.value) return false;
+    if(!AuthorityDic[selectedAuthority.value?.authority]) return false;
+    const code = AuthorityDic[selectedAuthority.value?.authority].code;
+    return code % 10 === 0;
+  })
+
+  // 영업 권한
+  const isBusiness = computed<boolean>(() => {
+    if (!selectedAuthority.value) return false;
+    if(!AuthorityDic[selectedAuthority.value?.authority]) return false;
+    const code = AuthorityDic[selectedAuthority.value?.authority].code;
+    const targetCode = AuthorityDic[Authority.ROLE_BUSINESS_P].code;
+    return Math.floor(code / 10) === Math.floor(targetCode / 10);
+  })
+
+  // 운영 권한
+  const isOperation = computed<boolean>(() => {
+    if (!selectedAuthority.value) return false;
+    if(!AuthorityDic[selectedAuthority.value?.authority]) return false;
+    const code = AuthorityDic[selectedAuthority.value?.authority].code;
+    const targetCode = AuthorityDic[Authority.ROLE_OPERATION_P].code;
+    return Math.floor(code / 10) === Math.floor(targetCode / 10);
+  })
+
+  // 처리 권한
+  const isDisposal = computed<boolean>(() => {
+    if (!selectedAuthority.value) return false;
+    if(!AuthorityDic[selectedAuthority.value?.authority]) return false;
+    const code = AuthorityDic[selectedAuthority.value?.authority].code;
+    const targetCode = AuthorityDic[Authority.ROLE_DISPOSAL_P].code;
+    return Math.floor(code / 10) === Math.floor(targetCode / 10);
+  })
+
+  // 수집운반 권한
+  const isDelivery = computed<boolean>(() => {
+    if (!selectedAuthority.value) return false;
+    if(!AuthorityDic[selectedAuthority.value?.authority]) return false;
+    const code = AuthorityDic[selectedAuthority.value?.authority].code;
+    const targetCode = AuthorityDic[Authority.ROLE_COLLECTING_P].code;
+    return Math.floor(code / 10) === Math.floor(targetCode / 10);
+  })
+
+  // 헤더에 표시할 권한 이름
+  // ex) 파트너/처리
+  const headerAuthorityName = computed(() => {
+    let role = '';
+    let companyPropertyDetail = '';
+
+    if (isPlatformAdmin.value) {
+      return i18n.global.t('user.platformAdmin');
+    }
+    if (!user.value || !('id' in user.value)) {
+      return '';
+    }
+    if (user.value.authorityList.length <= 0) {
+      return '';
+    }
+
+    // 계정 종류
+    if (isManagerMember.value) {
+      role = i18n.global.t('user.manager');
+    } else if (isPartnerMember.value) {
+      role = i18n.global.t('user.partner');
+    }
+    // 업장 종류
+    if (isOperation.value) {
+      companyPropertyDetail = i18n.global.t('user.operation');
+    } else if (isBusiness.value) {
+      companyPropertyDetail = i18n.global.t('user.business');
+    } else if (isDisposal.value) {
+      companyPropertyDetail = i18n.global.t('user.disposal');
+    } else if (isDelivery.value) {
+      companyPropertyDetail = i18n.global.t('user.delivery');
+    }
+    return `${role}/${companyPropertyDetail}`;
   });
 
   function debugJWT(token: string) {
@@ -548,15 +653,27 @@ export const useUserStore = defineStore('user', () => {
     // State
     user,
     token,
+    headerAuthorityName,
     selectedAuthority,
 
     // Computed
     userName,
     userId,
+    userImage,
     id,
     uuid,
     isAuthenticated,
+
+    // 권한 체크 부분
     isPlatformAdmin,
+    isCustomerMember,
+    isDriverMember,
+    isPartnerMember,
+    isManagerMember,
+    isBusiness,
+    isOperation,
+    isDisposal,
+    isDelivery,
 
     // Actions
     setToken,

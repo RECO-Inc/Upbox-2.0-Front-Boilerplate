@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script lang="ts" setup>
 import type { HTMLAttributes } from "vue"
 import { cn } from "@/lib/utils"
 
@@ -8,10 +8,12 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
-    data-sidebar="group"
-    :class="cn('relative flex w-full min-w-0 flex-col py-2 px-4 group-data-[collapsible=icon]:px-2', props.class)"
+  <span
+    role="link"
+    aria-disabled="true"
+    aria-current="page"
+    :class="cn('font-bold text-primary-90 text-size-12', props.class)"
   >
     <slot />
-  </div>
+  </span>
 </template>

@@ -36,18 +36,18 @@ export { default as SidebarTrigger } from "./SidebarTrigger.vue"
 export { useSidebar } from "./utils"
 
 export const sidebarMenuButtonVariants = cva(
-  "peer/menu-button flex w-full items-center gap-2 overflow-hidden rounded-md p-2 text-left text-sm outline-none ring-primary-80 transition-[width,height,padding] hover:bg-base-30 hover:text-base-100 focus-visible:ring-2 active:bg-base-30 active:text-base-100 disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 data-[active=true]:bg-base-30 data-[active=true]:font-medium data-[active=true]:text-base-100 data-[state=open]:hover:bg-base-30 data-[state=open]:hover:text-base-100 group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 [&>span:last-child]:truncate [&>svg]:size-4 [&>svg]:shrink-0",
+  "peer/menu-button flex w-full items-center gap-4 overflow-hidden rounded p-4 text-left font-bold outline-none transition-[background-color,color] duration-200 focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50 group-has-[[data-sidebar=menu-action]]/menu-item:pr-8 aria-disabled:pointer-events-none aria-disabled:opacity-50 group-data-[collapsible=icon]:!size-8 group-data-[collapsible=icon]:!p-2 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:gap-0 [&>span:last-child]:truncate [&>svg]:size-6 [&>svg]:shrink-0 hover:bg-primary-20 data-[active=true]:bg-primary-80 data-[active=true]:text-base-10 data-[active=true]:font-bold data-[active=true]:[&>svg]:text-base-10",
   {
     variants: {
       variant: {
-        default: "hover:bg-base-30 hover:text-base-100",
+        default: "hover:bg-primary-20",
         outline:
-          "bg-base-10 shadow-[0_0_0_1px_hsl(var(--base-40))] hover:bg-base-30 hover:text-base-100 hover:shadow-[0_0_0_1px_hsl(var(--base-30))]",
+          "bg-base-10 shadow-[0_0_0_1px_hsl(var(--base-40))] hover:bg-primary-20 hover:shadow-[0_0_0_1px_hsl(var(--base-30))]",
       },
       size: {
-        default: "h-8 text-sm",
-        sm: "h-7 text-xs",
-        lg: "h-12 text-sm group-data-[collapsible=icon]:!p-0",
+        default: "text-size-16",
+        sm: "text-size-14",
+        lg: "text-size-18 group-data-[collapsible=icon]:!p-0",
       },
     },
     defaultVariants: {

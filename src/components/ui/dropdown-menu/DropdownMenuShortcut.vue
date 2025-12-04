@@ -8,10 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div
-    data-sidebar="group"
-    :class="cn('relative flex w-full min-w-0 flex-col py-2 px-4 group-data-[collapsible=icon]:px-2', props.class)"
-  >
+  <span :class="cn('ml-auto text-xs tracking-widest opacity-60', props.class)">
     <slot />
-  </div>
+  </span>
 </template>

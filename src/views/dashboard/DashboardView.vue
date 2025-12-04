@@ -3,6 +3,7 @@ import {computed, ref} from 'vue'
 import type {DateValue} from '@internationalized/date'
 import {useI18n} from 'vue-i18n'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
+import AppHeader from '@/components/layout/AppHeader.vue'
 import {SidebarInset, SidebarProvider} from '@/components/ui/sidebar'
 import {Button} from '@/components/ui/button'
 import {Input} from '@/components/ui/input'
@@ -135,7 +136,8 @@ const displayDate = computed(() => {
   <SidebarProvider>
     <AppSidebar />
     <SidebarInset>
-      <main class="min-h-screen p-6">
+      <AppHeader />
+      <main class="min-h-screen p-6 pt-20">
         <div class="mx-auto max-w-7xl space-y-8">
           <!-- Header -->
           <div class="space-y-2">

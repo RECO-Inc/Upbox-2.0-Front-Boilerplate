@@ -1,16 +1,17 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n'
-import { useForm } from 'vee-validate'
-import { useUserStore } from '@/stores/user'
-import { useNotificationStore } from '@/stores/notification'
-import { AuthService } from '@/api/auth.service'
-import { hashedPassword } from '@/utils/auth'
-import AppSidebar from '@/components/layout/AppSidebar.vue'
-import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
-import { usePasswordChangeSchema } from '@/schemas/auth.schema'
+import {useI18n} from "vue-i18n";
+import {useForm} from "vee-validate";
+import {useUserStore} from "@/stores/user";
+import {useNotificationStore} from "@/stores/notification";
+import {AuthService} from "@/api/auth.service";
+import {hashedPassword} from "@/utils/auth";
+import AppSidebar from "@/components/layout/AppSidebar.vue";
+import AppHeader from "@/components/layout/AppHeader.vue";
+import {SidebarInset, SidebarProvider} from "@/components/ui/sidebar";
+import {Button} from "@/components/ui/button";
+import {Input} from "@/components/ui/input";
+import {FormControl, FormField, FormItem, FormLabel, FormMessage} from "@/components/ui/form";
+import {usePasswordChangeSchema} from "@/schemas/auth.schema";
 
 const { t } = useI18n()
 const userStore = useUserStore()
@@ -43,7 +44,8 @@ const onSubmit = form.handleSubmit(async (values) => {
   <SidebarProvider>
     <AppSidebar />
     <SidebarInset>
-      <main class="min-h-screen px-4 py-8 container mx-auto">
+      <AppHeader />
+      <main class="min-h-screen px-4 py-8 pt-20 container mx-auto">
         <div class="mx-auto max-w-2xl space-y-6">
           <!-- User Information Card -->
           <div class="rounded-lg border p-6 shadow-sm">
@@ -65,20 +67,6 @@ const onSubmit = form.handleSubmit(async (values) => {
                 <label class="text-size-14 font-medium">{{ t('user.email') }}</label>
                 <Input :model-value="userStore.user?.email || 'N/A'" readonly />
               </div>
-            </div>
-          </div>
-
-          <!-- Authority Card -->
-          <div class="rounded-lg border p-6 shadow-sm">
-            <h2 class="text-size-18 font-semibold">{{ t('user.authority') }}</h2>
-            <div class="mt-4 flex flex-wrap gap-2">
-              <span
-                v-for="auth in userStore.user?.authorityList"
-                :key="auth"
-                class="rounded-full bg-primary-20 px-4 py-2 text-size-14 font-medium text-primary-80"
-              >
-                {{ auth }}
-              </span>
             </div>
           </div>
 
