@@ -12,6 +12,7 @@ export default {
     error: '오류가 발생했습니다',
     success: '성공했습니다',
     saving: '저장 중...',
+    selectAll: '전체 선택',
   },
   auth: {
     login: '로그인',
@@ -371,6 +372,16 @@ export default {
         loginAuth: '로그인 권한',
         noLoginAuth: '로그인 권한이 없습니다',
         manager: '관리자',
+      },
+      dropdownFilter: {
+        countMore: '외 {count}개',
+        selected: '개 선택됨',
+        title: '드롭다운 필터',
+        description: '다중 선택이 가능한 필터 컴포넌트',
+        multiSelectLabel: '다중 선택',
+        singleSelectLabel: '단일 선택',
+        searchableLabel: '검색 가능',
+        highlightLabel: '강조 스타일',
       },
     },
     lifeCycle: {

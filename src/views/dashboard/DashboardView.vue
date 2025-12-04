@@ -12,6 +12,7 @@ import {Checkbox} from '@/components/ui/checkbox'
 import {Switch} from '@/components/ui/switch'
 import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group'
 import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from '@/components/ui/select'
+import {DropdownFilter} from '@/components/ui/dropdown-filter'
 import {Tabs, TabsContent, TabsList, TabsTrigger} from '@/components/ui/tabs'
 import {Card, CardContent, CardDescription, CardHeader, CardTitle} from '@/components/ui/card'
 import {Badge} from '@/components/ui/badge'
@@ -40,6 +41,20 @@ const checkboxValue = ref(false)
 const switchValue = ref(false)
 const radioValue = ref('option1')
 const selectValue = ref('')
+
+// DropdownFilter states
+const multiFilterValue = ref<string[]>([])
+const singleFilterValue = ref<string[]>([])
+const searchFilterValue = ref<string[]>([])
+const highlightFilterValue = ref<string[]>(['apple', 'banana'])
+const filterOptions = [
+  { label: 'Apple', value: 'apple' },
+  { label: 'Banana', value: 'banana' },
+  { label: 'Orange', value: 'orange' },
+  { label: 'Grape', value: 'grape' },
+  { label: 'Watermelon', value: 'watermelon' },
+  { label: 'Strawberry', value: 'strawberry' },
+]
 const toggleValue = ref(false)
 const toggleGroupValue = ref('center')
 const calendarDate = ref<DateValue>()
@@ -444,6 +459,61 @@ const displayDate = computed(() => {
                     </SelectContent>
                   </Select>
                   <p class="mt-4 text-size-14 text-base-60">{{ t('playground.select.selected') }}: {{ selectValue }}</p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>{{ t('ui.component.dropdownFilter.title') }}</CardTitle>
+                  <CardDescription>{{ t('ui.component.dropdownFilter.description') }}</CardDescription>
+                </CardHeader>
+                <CardContent class="space-y-6">
+                  <!-- Multi Select -->
+                  <div class="space-y-2">
+                    <label class="text-size-14 font-medium">{{ t('ui.component.dropdownFilter.multiSelectLabel') }}</label>
+                    <DropdownFilter
+                      v-model="multiFilterValue"
+                      :options="filterOptions"
+                      :placeholder="t('playground.select.placeholder')"
+                    />
+                    <p class="text-size-12 text-base-60">{{ t('playground.select.selected') }}: {{ multiFilterValue.join(', ') || '-' }}</p>
+                  </div>
+
+                  <!-- Single Select -->
+                  <div class="space-y-2">
+                    <label class="text-size-14 font-medium">{{ t('ui.component.dropdownFilter.singleSelectLabel') }}</label>
+                    <DropdownFilter
+                      v-model="singleFilterValue"
+                      :options="filterOptions"
+                      :placeholder="t('playground.select.placeholder')"
+                      single
+                    />
+                    <p class="text-size-12 text-base-60">{{ t('playground.select.selected') }}: {{ singleFilterValue.join(', ') || '-' }}</p>
+                  </div>
+
+                  <!-- With Search -->
+                  <div class="space-y-2">
+                    <label class="text-size-14 font-medium">{{ t('ui.component.dropdownFilter.searchableLabel') }}</label>
+                    <DropdownFilter
+                      v-model="searchFilterValue"
+                      :options="filterOptions"
+                      :placeholder="t('playground.select.placeholder')"
+                      search
+                    />
+                    <p class="text-size-12 text-base-60">{{ t('playground.select.selected') }}: {{ searchFilterValue.join(', ') || '-' }}</p>
+                  </div>
+
+                  <!-- Highlight Style -->
+                  <div class="space-y-2">
+                    <label class="text-size-14 font-medium">{{ t('ui.component.dropdownFilter.highlightLabel') }}</label>
+                    <DropdownFilter
+                      v-model="highlightFilterValue"
+                      :options="filterOptions"
+                      :placeholder="t('playground.select.placeholder')"
+                      display-style="highlight"
+                    />
+                    <p class="text-size-12 text-base-60">{{ t('playground.select.selected') }}: {{ highlightFilterValue.join(', ') || '-' }}</p>
+                  </div>
                 </CardContent>
               </Card>
 

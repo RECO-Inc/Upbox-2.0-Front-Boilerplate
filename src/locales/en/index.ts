@@ -12,6 +12,7 @@ export default {
     error: 'An error occurred',
     success: 'Success',
     saving: 'Saving...',
+    selectAll: 'Select All',
   },
   auth: {
     login: 'Login',
@@ -371,6 +372,16 @@ export default {
         loginAuth: 'Login Authority',
         noLoginAuth: 'No login authority',
         manager: 'Manager',
+      },
+      dropdownFilter: {
+        countMore: '+{count} more',
+        selected: ' selected',
+        title: 'Dropdown Filter',
+        description: 'Multi-select filter component',
+        multiSelectLabel: 'Multi Select',
+        singleSelectLabel: 'Single Select',
+        searchableLabel: 'With Search',
+        highlightLabel: 'Highlight Style',
       },
     },
     lifeCycle: {
