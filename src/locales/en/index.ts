@@ -11,6 +11,7 @@ export default {
     noData: 'No data available',
     error: 'An error occurred',
     success: 'Success',
+    saving: 'Saving...',
   },
   auth: {
     login: 'Login',
@@ -40,6 +41,15 @@ export default {
     confirmNewPassword: 'Confirm new password',
     passwordChangeSuccess: 'Password changed successfully',
     passwordChangeFailed: 'Failed to change password',
+    phoneNumber: 'Phone Number',
+    memo: 'Memo',
+    enterName: 'Enter name',
+    enterPhoneNumber: 'Enter phone number',
+    enterEmail: 'Enter email',
+    enterMemo: 'Enter memo',
+    saveProfile: 'Save Profile',
+    profileUpdateSuccess: 'Profile updated successfully',
+    profileUpdateFailed: 'Failed to update profile',
     business: 'Sales',
     changeAuthorityFailed: 'Failed to change authority.',
     delivery: 'Collection & Transport',
@@ -61,6 +71,13 @@ export default {
     reissueHasError: '{error} Please log in again.',
     saveBrowserTokenFailed: 'Error saving browser token to store.',
     inactiveAccountLogout: 'Account has been deactivated and logged out.',
+    profileImage: {
+      alt: 'Profile Image',
+      supportExt: 'Only .{ext} files are allowed.',
+      maxSize: 'File size must be less than {size}MB.',
+      uploadSuccess: 'Profile image uploaded successfully.',
+      uploadFailed: 'Failed to upload profile image.',
+    },
   },
   menu: {
     dashboard: 'Dashboard',
@@ -355,6 +372,10 @@ export default {
         noLoginAuth: 'No login authority',
         manager: 'Manager',
       },
+    },
+    lifeCycle: {
+      404: 'Page not found',
+      toMain: 'Go to Main',
     },
   },
   validation: {

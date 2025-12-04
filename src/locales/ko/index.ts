@@ -11,6 +11,7 @@ export default {
     noData: '데이터가 없습니다',
     error: '오류가 발생했습니다',
     success: '성공했습니다',
+    saving: '저장 중...',
   },
   auth: {
     login: '로그인',
@@ -40,6 +41,15 @@ export default {
     confirmNewPassword: '새 비밀번호를 다시 입력하세요',
     passwordChangeSuccess: '비밀번호가 성공적으로 변경되었습니다',
     passwordChangeFailed: '비밀번호 변경에 실패했습니다',
+    phoneNumber: '전화번호',
+    memo: '메모',
+    enterName: '이름을 입력하세요',
+    enterPhoneNumber: '전화번호를 입력하세요',
+    enterEmail: '이메일을 입력하세요',
+    enterMemo: '메모를 입력하세요',
+    saveProfile: '프로필 저장',
+    profileUpdateSuccess: '프로필이 성공적으로 수정되었습니다',
+    profileUpdateFailed: '프로필 수정에 실패했습니다',
     business: '영업',
     changeAuthorityFailed: '권한 변경을 실패했습니다.',
     delivery: '수집운반',
@@ -61,6 +71,13 @@ export default {
     reissueHasError: '{error} 다시 로그인 해주세요.',
     saveBrowserTokenFailed: '브라우저 토큰을 스토어에 저장 중 에러',
     inactiveAccountLogout: '계정이 비활성화되어 로그아웃되었습니다.',
+    profileImage: {
+      alt: '프로필 이미지',
+      supportExt: '.{ext} 파일만 업로드 가능합니다.',
+      maxSize: '{size}MB 이하의 파일만 업로드 가능합니다.',
+      uploadSuccess: '프로필 이미지가 업로드되었습니다.',
+      uploadFailed: '프로필 이미지 업로드에 실패했습니다.',
+    },
   },
   menu: {
     dashboard: '대시보드',
@@ -355,6 +372,10 @@ export default {
         noLoginAuth: '로그인 권한이 없습니다',
         manager: '관리자',
       },
+    },
+    lifeCycle: {
+      404: '페이지를 찾을 수 없습니다',
+      toMain: '메인으로 이동',
     },
   },
   validation: {
