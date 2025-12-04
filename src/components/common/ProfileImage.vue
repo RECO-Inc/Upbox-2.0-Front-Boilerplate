@@ -76,12 +76,13 @@ function validateImage(file: Blob): boolean {
 function onClickChooseFiles(e: Event) {
   const input = e.target as HTMLInputElement;
   if (input.files && input.files[0]) {
+    const file = input.files[0];
     const reader = new FileReader();
     reader.onload = async () => {
-      await doUpload(input.files![0]);
+      await doUpload(file);
       input.value = '';
     };
-    reader.readAsDataURL(input.files[0]);
+    reader.readAsDataURL(file);
   }
 }
 
