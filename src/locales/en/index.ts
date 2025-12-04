@@ -67,6 +67,7 @@ export default {
     noExistToken: 'No token found.',
     operation: 'Operation',
     partner: 'Partner',
+    customer: 'Customer',
     platformAdmin: 'Platform Admin',
     reissueError: 'Failed to reissue token.',
     reissueHasError: '{error} Please log in again.',

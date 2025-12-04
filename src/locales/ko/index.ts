@@ -67,6 +67,7 @@ export default {
     noExistToken: '토큰이 없습니다.',
     operation: '운영',
     partner: '파트너',
+    customer: '고객',
     platformAdmin: '플랫폼 관리자',
     reissueError: '토큰 재발급에 실패했습니다.',
     reissueHasError: '{error} 다시 로그인 해주세요.',

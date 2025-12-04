@@ -161,6 +161,8 @@ export const useUserStore = defineStore('user', () => {
     // 계정 종류
     if (isManagerMember.value) {
       role = i18n.global.t('user.manager');
+    } else if (isCustomerMember.value) {
+      role = i18n.global.t('user.customer');
     } else if (isPartnerMember.value) {
       role = i18n.global.t('user.partner');
     }
@@ -174,7 +176,7 @@ export const useUserStore = defineStore('user', () => {
     } else if (isDelivery.value) {
       companyPropertyDetail = i18n.global.t('user.delivery');
     }
-    return `${role}/${companyPropertyDetail}`;
+    return `${role}${companyPropertyDetail ? `/${companyPropertyDetail}` : ''}`;
   });
 
   function debugJWT(token: string) {
