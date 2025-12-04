@@ -169,9 +169,9 @@ function onReset() {
           )"
         >
           <div class="flex items-center gap-1 overflow-hidden text-size-13">
-            <span v-if="shownText" class="truncate font-bold text-primary-80">{{ shownText }}</span>
+            <span v-if="shownText" :class="cn('truncate font-bold', props.displayStyle === 'highlight' ? 'text-base-10' : 'text-primary-80')">{{ shownText }}</span>
             <span v-else class="text-base-50">{{ props.placeholder }}</span>
-            <span v-if="multiCountText" class="shrink-0 font-bold text-primary-80">{{ multiCountText }}</span>
+            <span v-if="multiCountText" :class="cn('shrink-0 font-bold', props.displayStyle === 'highlight' ? 'text-base-10' : 'text-primary-80')">{{ multiCountText }}</span>
           </div>
           <ChevronDown
             :class="cn(
